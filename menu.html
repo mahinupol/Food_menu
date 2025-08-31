@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Menu - Smart Digital Food Menu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="IMG/LOGO/849846E2-5103-46B1-B286-A21D06EBB963.PNG" alt="Smart Digital Food Menu Logo" class="logo-menu me-2">
+                <span class="brand-text">Smart Digital Food Menu</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="diseases.html">Diseases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu.html">Food Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light ms-2 mt-1" id="darkModeToggle">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Food Menu Section -->
+    <section class="menu-section py-5">
+        <div class="container">
+            <div class="menu-header text-center mb-5 animate-fade-in">
+                <h1 class="display-4 fw-bold">Food Menu</h1>
+                <p class="lead text-muted">Discover healthy food options tailored to your dietary needs</p>
+            </div>
+            
+            <!-- Search and Sort Controls -->
+            <div class="row mb-4 animate-slide-up">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" id="searchFood" placeholder="Search for food...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-sort"></i></span>
+                        <select class="form-select" id="sortFood">
+                            <option value="recommended">Recommended First</option>
+                            <option value="name">Name (A-Z)</option>
+                            <option value="nameDesc">Name (Z-A)</option>
+                            <option value="category">Category</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personalized Diet Plan Section -->
+            <div id="recommendedTodaySection" class="recommended-today-section mb-5 animate-fade-in d-none">
+                <div class="card shadow-sm border-success">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="mb-0"><i class="fas fa-utensils me-2"></i> Recommended Today</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Your Personalized Meal Plan</h5>
+                        <p class="card-text text-muted mb-4">Based on your health conditions, we recommend this meal combination:</p>
+                        
+                        <div class="row" id="recommendedMeals">
+                            <!-- Meal recommendations will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Allergen Filter -->
+            <div class="allergen-filter mb-4 animate-slide-up">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i> Allergen & Ingredient Filter</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-3">Select allergens to exclude from your food options:</p>
+                        <div class="d-flex flex-wrap">
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="peanuts" id="peanuts">
+                                <label class="form-check-label" for="peanuts">Peanuts</label>
+                            </div>
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="soy" id="soy">
+                                <label class="form-check-label" for="soy">Soy</label>
+                            </div>
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="eggs" id="eggs">
+                                <label class="form-check-label" for="eggs">Eggs</label>
+                            </div>
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="shellfish" id="shellfish">
+                                <label class="form-check-label" for="shellfish">Shellfish</label>
+                            </div>
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="dairy" id="dairy">
+                                <label class="form-check-label" for="dairy">Dairy</label>
+                            </div>
+                            <div class="form-check me-3 mb-2">
+                                <input class="form-check-input allergen-checkbox" type="checkbox" value="gluten" id="gluten">
+                                <label class="form-check-label" for="gluten">Gluten</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons mb-4 text-center animate-slide-up">
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn active" data-filter="all">All</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Fast Food">Fast Food</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Indian">Indian</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Italian">Italian</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Protein">Protein</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Seafood">Seafood</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Vegetarian">Vegetarian</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Dessert">Dessert</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Drink">Drink</button>
+                <button class="btn btn-outline-success me-2 mb-2 filter-btn" data-filter="Meat">Meat</button>
+            </div>
+            
+            <!-- Food Cards -->
+            <div class="row g-4" id="foodContainer">
+                <!-- Fast Food -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Fast Food" 
+                     data-allergens="gluten,soy" 
+                     data-calories="550" 
+                     data-protein="25" 
+                     data-carbs="40" 
+                     data-fat="30" 
+                     data-sodium="980"
+                     data-unsafe-for="diabetes,hypertension,celiac">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Not safe for Diabetes"><i class="fas fa-times-circle text-danger"></i> Diabetes</span>
+                            <span class="disease-icon hypertension" title="Not safe for Hypertension"><i class="fas fa-times-circle text-danger"></i> Hypertension</span>
+                            <span class="disease-icon celiac" title="Not safe for Celiac Disease"><i class="fas fa-times-circle text-danger"></i> Celiac</span>
+                        </div>
+                        <img src="IMG/hamburger.png" class="card-img-top food-image" alt="Hamburger">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Hamburger</h5>
+                                <span class="badge bg-danger">Avoid</span>
+                            </div>
+                            <p class="card-text">Category: Fast Food</p>
+                            <p class="card-text"><small class="text-muted">High in saturated fat and sodium.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionHamburger">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionHamburger">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 550</li>
+                                            <li><strong>Protein:</strong> 25g</li>
+                                            <li><strong>Carbs:</strong> 40g</li>
+                                            <li><strong>Fat:</strong> 30g</li>
+                                            <li><strong>Sodium:</strong> 980mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-warning text-dark">Gluten</span>
+                                            <span class="badge bg-warning text-dark">Soy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Hamburger">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Indian Food -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Indian"
+                     data-allergens="none" 
+                     data-calories="320" 
+                     data-protein="10" 
+                     data-carbs="55" 
+                     data-fat="8" 
+                     data-sodium="340"
+                     data-safe-for="diabetes,hypertension,celiac,kidney,lactose,gout,ibs">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                        </div>
+                        <img src="IMG/biryani.png" class="card-img-top food-image" alt="Biryani">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Vegetable Biryani</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Indian</p>
+                            <p class="card-text"><small class="text-muted">Low in fat, high in fiber and protein.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionBiryani">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionBiryani">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 320</li>
+                                            <li><strong>Protein:</strong> 10g</li>
+                                            <li><strong>Carbs:</strong> 55g</li>
+                                            <li><strong>Fat:</strong> 8g</li>
+                                            <li><strong>Sodium:</strong> 340mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Vegetable Biryani">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Italian Food -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Italian"
+                     data-allergens="gluten,dairy" 
+                     data-calories="780" 
+                     data-protein="30" 
+                     data-carbs="95" 
+                     data-fat="28" 
+                     data-sodium="1200"
+                     data-unsafe-for="diabetes,celiac,lactose">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Not safe for Diabetes"><i class="fas fa-times-circle text-danger"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Not safe for Celiac Disease"><i class="fas fa-times-circle text-danger"></i> Celiac</span>
+                            <span class="disease-icon lactose" title="Not safe for Lactose Intolerance"><i class="fas fa-times-circle text-danger"></i> Lactose</span>
+                        </div>
+                        <img src="IMG/pizza.png" class="card-img-top food-image" alt="Pizza">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Margherita Pizza</h5>
+                                <span class="badge bg-danger">Avoid</span>
+                            </div>
+                            <p class="card-text">Category: Italian</p>
+                            <p class="card-text"><small class="text-muted">High in refined carbs and sodium.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionPizza">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionPizza">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 780</li>
+                                            <li><strong>Protein:</strong> 30g</li>
+                                            <li><strong>Carbs:</strong> 95g</li>
+                                            <li><strong>Fat:</strong> 28g</li>
+                                            <li><strong>Sodium:</strong> 1200mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-warning text-dark">Gluten</span>
+                                            <span class="badge bg-warning text-dark">Dairy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Margherita Pizza">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Protein -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Protein"
+                     data-allergens="none" 
+                     data-calories="165" 
+                     data-protein="31" 
+                     data-carbs="0" 
+                     data-fat="3.6" 
+                     data-sodium="74"
+                     data-safe-for="diabetes,celiac,hypertension,kidney,lactose,gout">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                        </div>
+                        <img src="IMG/chicken-leg.png" class="card-img-top food-image" alt="Grilled Chicken">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Grilled Chicken</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Protein</p>
+                            <p class="card-text"><small class="text-muted">High in protein, low in fat.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionChicken">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionChicken">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 165</li>
+                                            <li><strong>Protein:</strong> 31g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 3.6g</li>
+                                            <li><strong>Sodium:</strong> 74mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Grilled Chicken">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seafood -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Seafood"
+                     data-allergens="fish" 
+                     data-calories="206" 
+                     data-protein="22" 
+                     data-carbs="0" 
+                     data-fat="13" 
+                     data-sodium="59"
+                     data-safe-for="diabetes,celiac,hypertension,lactose"
+                     data-unsafe-for="gout">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                            <span class="disease-icon gout" title="Not safe for Gout"><i class="fas fa-times-circle text-danger"></i> Gout</span>
+                        </div>
+                        <img src="IMG/salmon.png" class="card-img-top food-image" alt="Grilled Salmon">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Grilled Salmon</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Seafood</p>
+                            <p class="card-text"><small class="text-muted">Rich in omega-3 fatty acids.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionSalmon">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionSalmon">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 206</li>
+                                            <li><strong>Protein:</strong> 22g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 13g</li>
+                                            <li><strong>Sodium:</strong> 59mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-warning text-dark">Fish</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Grilled Salmon">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dessert -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Dessert"
+                     data-allergens="gluten,dairy,eggs" 
+                     data-calories="352" 
+                     data-protein="5" 
+                     data-carbs="50" 
+                     data-fat="16" 
+                     data-sodium="260"
+                     data-unsafe-for="diabetes,celiac,lactose">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Not safe for Diabetes"><i class="fas fa-times-circle text-danger"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Not safe for Celiac Disease"><i class="fas fa-times-circle text-danger"></i> Celiac</span>
+                            <span class="disease-icon lactose" title="Not safe for Lactose Intolerance"><i class="fas fa-times-circle text-danger"></i> Lactose</span>
+                        </div>
+                        <img src="IMG/chocolate-cake.png" class="card-img-top food-image" alt="Chocolate Cake">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Chocolate Cake</h5>
+                                <span class="badge bg-danger">Avoid</span>
+                            </div>
+                            <p class="card-text">Category: Dessert</p>
+                            <p class="card-text"><small class="text-muted">High in sugar and refined carbs.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionCake">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionCake">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 352</li>
+                                            <li><strong>Protein:</strong> 5g</li>
+                                            <li><strong>Carbs:</strong> 50g</li>
+                                            <li><strong>Fat:</strong> 16g</li>
+                                            <li><strong>Sodium:</strong> 260mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-warning text-dark">Gluten</span>
+                                            <span class="badge bg-warning text-dark">Dairy</span>
+                                            <span class="badge bg-warning text-dark">Eggs</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Chocolate Cake">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Drink"
+                     data-allergens="none" 
+                     data-calories="2" 
+                     data-protein="0" 
+                     data-carbs="0" 
+                     data-fat="0" 
+                     data-sodium="0"
+                     data-safe-for="diabetes,celiac,hypertension,kidney,lactose,gout,ibs">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                        </div>
+                        <img src="IMG/green-tea.png" class="card-img-top food-image" alt="Green Tea">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Green Tea</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Drink</p>
+                            <p class="card-text"><small class="text-muted">Rich in antioxidants.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionTea">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionTea">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 2</li>
+                                            <li><strong>Protein:</strong> 0g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 0g</li>
+                                            <li><strong>Sodium:</strong> 0mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Green Tea">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vegetarian -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Vegetarian"
+                     data-allergens="none" 
+                     data-calories="230" 
+                     data-protein="18" 
+                     data-carbs="40" 
+                     data-fat="1" 
+                     data-sodium="500"
+                     data-safe-for="diabetes,celiac,lactose,gout,ibs">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon lactose" title="Safe for Lactose Intolerance"><i class="fas fa-check-circle text-success"></i> Lactose</span>
+                        </div>
+                        <img src="IMG/lentils.png" class="card-img-top food-image" alt="Lentil Soup">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Lentil Soup</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Vegetarian</p>
+                            <p class="card-text"><small class="text-muted">High in fiber and plant protein.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionLentil">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionLentil">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 230</li>
+                                            <li><strong>Protein:</strong> 18g</li>
+                                            <li><strong>Carbs:</strong> 40g</li>
+                                            <li><strong>Fat:</strong> 1g</li>
+                                            <li><strong>Sodium:</strong> 500mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Lentil Soup">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Meat -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Meat"
+                     data-allergens="none" 
+                     data-calories="420" 
+                     data-protein="35" 
+                     data-carbs="0" 
+                     data-fat="32" 
+                     data-sodium="125"
+                     data-unsafe-for="hypertension,gout,kidney">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon hypertension" title="Not safe for Hypertension"><i class="fas fa-times-circle text-danger"></i> Hypertension</span>
+                            <span class="disease-icon gout" title="Not safe for Gout"><i class="fas fa-times-circle text-danger"></i> Gout</span>
+                            <span class="disease-icon kidney" title="Not safe for Kidney Disease"><i class="fas fa-times-circle text-danger"></i> Kidney</span>
+                        </div>
+                        <img src="IMG/steak.png" class="card-img-top food-image" alt="Steak">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Ribeye Steak</h5>
+                                <span class="badge bg-danger">Avoid</span>
+                            </div>
+                            <p class="card-text">Category: Meat</p>
+                            <p class="card-text"><small class="text-muted">High in saturated fat.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionSteak">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionSteak">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 420</li>
+                                            <li><strong>Protein:</strong> 35g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 32g</li>
+                                            <li><strong>Sodium:</strong> 125mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Ribeye Steak">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Indian Food -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Indian"
+                     data-allergens="dairy" 
+                     data-calories="240" 
+                     data-protein="30" 
+                     data-carbs="2" 
+                     data-fat="12" 
+                     data-sodium="520"
+                     data-safe-for="diabetes,celiac,hypertension"
+                     data-unsafe-for="lactose">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon lactose" title="Not safe for Lactose Intolerance"><i class="fas fa-times-circle text-danger"></i> Lactose</span>
+                        </div>
+                        <img src="IMG/tandoori.png" class="card-img-top food-image" alt="Tandoori Chicken">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Tandoori Chicken</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Indian</p>
+                            <p class="card-text"><small class="text-muted">High in protein, low in carbs.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionTandoori">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionTandoori">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 240</li>
+                                            <li><strong>Protein:</strong> 30g</li>
+                                            <li><strong>Carbs:</strong> 2g</li>
+                                            <li><strong>Fat:</strong> 12g</li>
+                                            <li><strong>Sodium:</strong> 520mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-warning text-dark">Dairy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Tandoori Chicken">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Protein -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Protein"
+                     data-allergens="none" 
+                     data-calories="189" 
+                     data-protein="29" 
+                     data-carbs="0" 
+                     data-fat="7" 
+                     data-sodium="68"
+                     data-safe-for="diabetes,celiac,lactose,hypertension">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                        </div>
+                        <img src="IMG/grilled-meat.png" class="card-img-top food-image" alt="Grilled Turkey">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Grilled Turkey</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Protein</p>
+                            <p class="card-text"><small class="text-muted">Lean protein, low in fat.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionTurkey">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionTurkey">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 189</li>
+                                            <li><strong>Protein:</strong> 29g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 7g</li>
+                                            <li><strong>Sodium:</strong> 68mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Grilled Turkey">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Drink"
+                     data-allergens="none" 
+                     data-calories="0" 
+                     data-protein="0" 
+                     data-carbs="0" 
+                     data-fat="0" 
+                     data-sodium="5"
+                     data-safe-for="diabetes,celiac,hypertension,kidney,lactose,gout,ibs">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon diabetes" title="Safe for Diabetes"><i class="fas fa-check-circle text-success"></i> Diabetes</span>
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                        </div>
+                        <img src="IMG/bottle.png" class="card-img-top food-image" alt="Mineral Water">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Mineral Water</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Drink</p>
+                            <p class="card-text"><small class="text-muted">Zero calories, essential for hydration.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionWater">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionWater">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 0</li>
+                                            <li><strong>Protein:</strong> 0g</li>
+                                            <li><strong>Carbs:</strong> 0g</li>
+                                            <li><strong>Fat:</strong> 0g</li>
+                                            <li><strong>Sodium:</strong> 5mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Mineral Water">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vegetarian -->
+                <div class="col-md-6 col-lg-4 food-item animate-card" data-category="Vegetarian"
+                     data-allergens="none" 
+                     data-calories="216" 
+                     data-protein="5" 
+                     data-carbs="45" 
+                     data-fat="1.8" 
+                     data-sodium="10"
+                     data-safe-for="celiac,hypertension,lactose,gout,ibs">
+                    <div class="card h-100">
+                        <div class="disease-compatibility">
+                            <span class="disease-icon celiac" title="Safe for Celiac Disease"><i class="fas fa-check-circle text-success"></i> Celiac</span>
+                            <span class="disease-icon hypertension" title="Safe for Hypertension"><i class="fas fa-check-circle text-success"></i> Hypertension</span>
+                            <span class="disease-icon lactose" title="Safe for Lactose Intolerance"><i class="fas fa-check-circle text-success"></i> Lactose</span>
+                        </div>
+                        <img src="IMG/rice.png" class="card-img-top food-image" alt="Brown Rice Bowl">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Brown Rice Bowl</h5>
+                                <span class="badge bg-success">Recommended</span>
+                            </div>
+                            <p class="card-text">Category: Vegetarian</p>
+                            <p class="card-text"><small class="text-muted">High in fiber, complex carbohydrates.</small></p>
+                            
+                            <div class="nutrition-info">
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutritionRice">
+                                    Nutrition Info <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <div class="collapse mt-2" id="nutritionRice">
+                                    <div class="card card-body nutrition-details p-2">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><strong>Calories:</strong> 216</li>
+                                            <li><strong>Protein:</strong> 5g</li>
+                                            <li><strong>Carbs:</strong> 45g</li>
+                                            <li><strong>Fat:</strong> 1.8g</li>
+                                            <li><strong>Sodium:</strong> 10mg</li>
+                                        </ul>
+                                        <div class="allergen-tags mt-1">
+                                            <span class="badge bg-success text-white">No Common Allergens</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-success w-100 mt-2 compare-btn" data-food="Brown Rice Bowl">
+                                <i class="fas fa-balance-scale me-1"></i> Compare
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Nutrition Information Section -->
+    <section class="nutrition-section py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="text-center mb-4 animate-fade-in">Nutrition Information</h2>
+                    <div class="card shadow-sm animate-slide-up">
+                        <div class="card-body p-4">
+                            <div class="accordion" id="nutritionAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Diabetes-Friendly Foods
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#nutritionAccordion">
+                                        <div class="accordion-body">
+                                            <p>People with diabetes should focus on foods that are low in refined carbohydrates and added sugars. Good options include:</p>
+                                            <ul>
+                                                <li>Non-starchy vegetables like leafy greens, broccoli, and peppers</li>
+                                                <li>Lean proteins such as chicken, fish, and tofu</li>
+                                                <li>Healthy fats from sources like avocados, nuts, and olive oil</li>
+                                                <li>Whole grains in moderate portions</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Heart-Healthy Choices
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#nutritionAccordion">
+                                        <div class="accordion-body">
+                                            <p>For those with hypertension or heart concerns, consider these guidelines:</p>
+                                            <ul>
+                                                <li>Choose foods low in sodium and saturated fat</li>
+                                                <li>Include sources of omega-3 fatty acids like salmon and walnuts</li>
+                                                <li>Incorporate potassium-rich foods like bananas and sweet potatoes</li>
+                                                <li>Opt for lean proteins and plant-based options when possible</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Gluten-Free Options
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#nutritionAccordion">
+                                        <div class="accordion-body">
+                                            <p>For those with celiac disease or gluten sensitivity, safe options include:</p>
+                                            <ul>
+                                                <li>Naturally gluten-free grains like rice and quinoa</li>
+                                                <li>Fresh fruits and vegetables</li>
+                                                <li>Unprocessed meats, fish, and poultry</li>
+                                                <li>Legumes, nuts, and seeds</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2023 Smart Digital Food Menu. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Food Comparison Modal -->
+    <div class="modal fade" id="comparisonModal" tabindex="-1" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="comparisonModalLabel">Food Comparison</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 border-end">
+                            <div id="food1Details" class="text-center">
+                                <h5 id="food1Title">Select First Food</h5>
+                                <div id="food1Image" class="my-3"></div>
+                                <div id="food1Nutrition" class="text-start mt-3"></div>
+                                <div id="food1Diseases" class="text-start mt-3"></div>
+                                <div id="food1Allergens" class="text-start mt-3"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="food2Details" class="text-center">
+                                <h5 id="food2Title">Select Second Food</h5>
+                                <div id="food2Image" class="my-3"></div>
+                                <div id="food2Nutrition" class="text-start mt-3"></div>
+                                <div id="food2Diseases" class="text-start mt-3"></div>
+                                <div id="food2Allergens" class="text-start mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="resetComparison">Reset Comparison</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Navbar Styles */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.logo {
+    width: 44px;  /* 10% bigger */
+    height: 44px; /* 10% bigger */
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 2px;
+    background-color: white;
+}
+
+.logo-menu {
+    width: 35px;  /* 10% bigger */
+    height: 35px; /* 10% bigger */
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 2px;
+    background-color: white;
+}
+
+@media (max-width: 576px) {
+    .logo-menu {
+        width: 31px;  /* 10% bigger */
+        height: 31px; /* 10% bigger */
+        padding: 1px;
+        border-width: 1px;
+    }
+    .brand-text {
+        font-size: 0.9rem;
+    }
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #28a745 !important;
+}
+
+.nav-link.active {
+    color: #28a745 !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #43a047, #1de9b6);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-logo {
+    width: 132px;  /* 10% bigger */
+    height: 132px; /* 10% bigger */
+    margin-bottom: 20px;
+    border: 4px solid white;
+    border-radius: 16px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.get-started-btn {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: #f57c00;
+    border-color: #f57c00;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Disease Selection Page */
+.disease-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.disease-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.disease-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.form-check-label {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+/* Food Menu Page */
+.menu-header h1 {
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+.filter-buttons {
+    margin-top: 1rem;
+}
+
+.filter-btn {
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.filter-btn.active {
+    background-color: #43a047;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nutrition-section {
+    background-color: #f1f8e9;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card-body {
+    padding-top: 0.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top.food-image {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+    margin: 15px auto 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card:hover .card-img-top.food-image {
+    transform: scale(1.1);
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* About Page */
+.about-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    border: 3px solid #43a047;
+    border-radius: 12px;
+    padding: 4px;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Page */
+.contact-info {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #43a047;
+    border-color: #43a047;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #388e3c;
+    border-color: #388e3c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .hero-logo {
+        width: 88px;  /* 10% bigger */
+        height: 88px; /* 10% bigger */
+        border-width: 3px;
+        padding: 3px;
+    }
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-card {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s ease;
+}
+
+.animated {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Staggered animation for cards */
+.animate-card:nth-child(1) { transition-delay: 0.1s; }
+.animate-card:nth-child(2) { transition-delay: 0.2s; }
+.animate-card:nth-child(3) { transition-delay: 0.3s; }
+.animate-card:nth-child(4) { transition-delay: 0.4s; }
+.animate-card:nth-child(5) { transition-delay: 0.5s; }
+.animate-card:nth-child(6) { transition-delay: 0.6s; }
+.animate-card:nth-child(7) { transition-delay: 0.7s; }
+.animate-card:nth-child(8) { transition-delay: 0.8s; }
+.animate-card:nth-child(9) { transition-delay: 0.9s; }
+
+/* Disease Icons */
+.disease-compatibility {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    z-index: 1;
+}
+
+.disease-icon {
+    padding: 2px 5px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.disease-icon i {
+    font-size: 0.8rem;
+}
+
+/* Nutrition Info */
+.nutrition-details {
+    font-size: 0.8rem;
+}
+
+.allergen-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Recommended Today Section */
+.recommended-today-section .card {
+    border-color: #43a047;
+}
+
+/* Food Comparison */
+.compare-btn:hover {
+    background-color: #43a047;
+    color: white;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #0a1929;
+    color: #f0f0f0;
+}
+
+body.dark-mode .card {
+    background-color: #132f4c;
+    color: #f0f0f0;
+    border-color: #173a5e;
+}
+
+body.dark-mode .card-body {
+    background-color: #132f4c;
+}
+
+body.dark-mode .text-muted {
+    color: #b0bec5 !important;
+}
+
+body.dark-mode .logo,
+body.dark-mode .logo-menu,
+body.dark-mode .hero-logo,
+body.dark-mode .about-logo {
+    border-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.5);
+}
+
+body.dark-mode .navbar {
+    background-color: #071a2e !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .footer {
+    background-color: #071a2e !important;
+}
+
+body.dark-mode .nutrition-details {
+    background-color: #173a5e;
+    color: #f0f0f0;
+    border-color: #2a4d69;
+}
+
+body.dark-mode .allergen-filter .card,
+body.dark-mode .recommended-today-section .card {
+    background-color: #132f4c;
+    border-color: #2a4d69;
+}
+
+body.dark-mode .allergen-filter .card-header {
+    background-color: #9c7a00;
+    color: #ffffff;
+}
+
+body.dark-mode .recommended-today-section .card-header {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+body.dark-mode .modal-content {
+    background-color: #132f4c;
+    color: #f0f0f0;
+    border-color: #173a5e;
+}
+
+body.dark-mode .modal-header {
+    border-bottom-color: #173a5e;
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: #173a5e;
+}
+
+/* Dark mode button styles */
+body.dark-mode .btn-primary {
+    background-color: #1976d2;
+    border-color: #1565c0;
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-primary:focus {
+    background-color: #1565c0;
+    border-color: #0d47a1;
+}
+
+body.dark-mode .btn-success {
+    background-color: #2e7d32;
+    border-color: #1b5e20;
+}
+
+body.dark-mode .btn-success:hover,
+body.dark-mode .btn-success:focus {
+    background-color: #1b5e20;
+    border-color: #103e13;
+}
+
+body.dark-mode .btn-warning {
+    background-color: #ff8f00;
+    border-color: #ff6f00;
+    color: #000;
+}
+
+body.dark-mode .btn-warning:hover,
+body.dark-mode .btn-warning:focus {
+    background-color: #ff6f00;
+    border-color: #ff6f00;
+    color: #000;
+}
+
+/* Dark mode form elements */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #173a5e;
+    border-color: #2a4d69;
+    color: #f0f0f0;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: #173a5e;
+    border-color: #1976d2;
+    color: #f0f0f0;
+    box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
+}
+
+body.dark-mode .input-group-text {
+    background-color: #173a5e;
+    border-color: #2a4d69;
+    color: #f0f0f0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #43a047;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #388e3c;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #0a1929;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #2e7d32;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #388e3c;
+}
+
+/* Smart Search Styling */
+.search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.search-tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-tag:hover {
+    background-color: #43a047;
+    color: white;
+}
+
+body.dark-mode .search-tag {
+    background-color: #173a5e;
+    color: #f0f0f0;
+}
+
+body.dark-mode .search-tag:hover {
+    background-color: #2e7d32;
+    color: #ffffff;
+}

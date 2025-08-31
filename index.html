@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Digital Food Menu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Animated Background */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('IMG/Background/Front_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+
+        
+        /* Animated Text */
+        .animated-heading {
+            animation: slideInDown 1.5s ease-out;
+        }
+        
+        .animated-description {
+            animation: slideInUp 1.5s ease-out 0.5s both;
+        }
+        
+        .animated-logo {
+            animation: fadeInScale 2s ease-out;
+        }
+        
+        .animated-btn {
+            animation: slideInUp 1.5s ease-out 1s both;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Floating Food Icons */
+        .floating-icon {
+            position: absolute;
+            opacity: 0.2;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #43a047;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background-color: #43a047;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-close {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .chatbot-input-container {
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+        }
+        
+        .chatbot-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        
+        .chatbot-send {
+            background-color: #43a047;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .message {
+            margin-bottom: 10px;
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .bot-message {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        
+        .user-message {
+            background-color: #e3f2fd;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        
+        .suggested-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        
+        .question-chip {
+            background-color: #e3f2fd;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .question-chip:hover {
+            background-color: #bbdefb;
+        }
+        
+        /* Feature Cards Styling */
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        .feature-icon {
+            height: 80px;
+            width: 80px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(67, 160, 71, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .features-section {
+            padding: 80px 0;
+        }
+        
+        /* Testimonials Section Styling */
+        .testimonials-section {
+            background-color: #f9f9f9;
+            padding: 80px 0 100px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            background-color: #43a047;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+        }
+        
+        .carousel-control-prev {
+            left: -50px;
+        }
+        
+        .carousel-control-next {
+            right: -50px;
+        }
+        
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #43a047;
+        }
+        
+        /* CTA Section Styling */
+        .cta-section {
+            background: linear-gradient(135deg, #43a047, #1de9b6);
+            padding: 80px 0;
+        }
+        
+        .cta-section .btn-light:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Media queries for better responsiveness */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh !important;
+            }
+            
+            .feature-card {
+                margin-bottom: 20px;
+            }
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                display: none;
+            }
+            
+            .testimonials-section {
+                padding: 60px 0;
+            }
+            
+            .cta-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="IMG/LOGO/849846E2-5103-46B1-B286-A21D06EBB963.PNG" alt="Smart Digital Food Menu Logo" class="logo me-2">
+                <span>Smart Digital Food Menu</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="diseases.html">Diseases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">Food Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light ms-2 mt-1" id="darkModeToggle">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Made Larger -->
+    <section class="hero-section py-5" style="min-height: 90vh; display: flex; align-items: center;">
+        <!-- Floating Food Icons - More icons added -->
+        <img src="IMG/hamburger.png" class="floating-icon" style="top: 10%; left: 10%; width: 60px;" alt="Floating Food Icon">
+        <img src="IMG/biryani.png" class="floating-icon" style="top: 15%; right: 15%; width: 70px; animation-delay: 1s;" alt="Floating Food Icon">
+        <img src="IMG/salmon.png" class="floating-icon" style="bottom: 20%; left: 20%; width: 65px; animation-delay: 2s;" alt="Floating Food Icon">
+        <img src="IMG/green-tea.png" class="floating-icon" style="bottom: 15%; right: 10%; width: 55px; animation-delay: 3s;" alt="Floating Food Icon">
+        <img src="IMG/fruit.png" class="floating-icon" style="top: 40%; left: 5%; width: 50px; animation-delay: 4s;" alt="Floating Food Icon">
+        <img src="IMG/chicken-leg.png" class="floating-icon" style="top: 25%; left: 30%; width: 55px; animation-delay: 2.5s;" alt="Floating Food Icon">
+        <img src="IMG/lentils.png" class="floating-icon" style="bottom: 30%; right: 25%; width: 60px; animation-delay: 3.5s;" alt="Floating Food Icon">
+        
+        <div class="container text-center">
+            <img src="IMG/LOGO/849846E2-5103-46B1-B286-A21D06EBB963.PNG" alt="Smart Digital Food Menu Logo" class="hero-logo mb-5 animated-logo" style="width: 150px; height: 150px;">
+            <h1 class="display-3 fw-bold text-white mb-4 animated-heading" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Eat Smart, Stay Healthy</h1>
+            <p class="lead mb-5 text-white fs-4 animated-description" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">Select your health condition and instantly see which restaurant foods are safe for you.</p>
+            
+            <!-- Quick Disease Selector - Made Larger -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7">
+                    <div class="input-group input-group-lg">
+                        <select class="form-select form-select-lg" id="quickDiseaseSelect" style="font-size: 1.2rem; padding: 12px 20px;">
+                            <option selected disabled>Select a health condition...</option>
+                            <option value="diabetes">Diabetes</option>
+                            <option value="celiac">Celiac Disease</option>
+                            <option value="hypertension">Hypertension</option>
+                            <option value="kidney">Chronic Kidney Disease</option>
+                            <option value="lactose">Lactose Intolerance</option>
+                            <option value="gout">Gout</option>
+                            <option value="ibs">Irritable Bowel Syndrome (IBS)</option>
+                        </select>
+                        <button class="btn btn-warning btn-lg" type="button" id="quickDiseaseGo" style="font-size: 1.2rem; padding: 12px 25px;">Go</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center gap-4">
+                <a href="diseases.html" class="btn btn-primary btn-lg get-started-btn animated-btn" style="font-size: 1.2rem; padding: 15px 30px;">Get Started</a>
+                <button class="btn btn-success btn-lg animated-btn" id="openChatbot" style="font-size: 1.2rem; padding: 15px 30px;">
+                    <i class="fas fa-robot me-2"></i>Ask Our AI Assistant
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- New Feature Highlights Section -->
+    <section class="features-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Our Feature </h2>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-utensils fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="card-title">Personalized Diet Plans</h4>
+                            <p class="card-text">Get customized meal recommendations based on your specific health conditions and dietary restrictions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-heartbeat fa-3x text-danger"></i>
+                            </div>
+                            <h4 class="card-title">Health-Focused Choices</h4>
+                            <p class="card-text">Easily identify foods that are safe for your health condition with our color-coded recommendation system.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-robot fa-3x text-success"></i>
+                            </div>
+                            <h4 class="card-title">AI Nutrition Assistant</h4>
+                            <p class="card-text">Get instant answers to your dietary questions from our intelligent AI assistant, available 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="diseases.html" class="btn btn-outline-primary btn-lg">Explore More Features</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">What Our Users Say</h2>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- Testimonial 1 -->
+                            <div class="carousel-item active">
+                                <div class="testimonial-card text-center p-4">
+                                    <div class="testimonial-img mb-3">
+                                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User Testimonial" class="rounded-circle" width="80" height="80">
+                                    </div>
+                                    <p class="testimonial-text fs-5 fst-italic mb-3">"As someone living with diabetes, this app has been a game-changer for me. I can now eat out with confidence knowing which menu items are safe for my condition."</p>
+                                    <h5 class="mb-1">Sarah Johnson</h5>
+                                    <p class="text-muted small">Diabetes Patient</p>
+                                    <div class="testimonial-rating text-warning">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 2 -->
+                            <div class="carousel-item">
+                                <div class="testimonial-card text-center p-4">
+                                    <div class="testimonial-img mb-3">
+                                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User Testimonial" class="rounded-circle" width="80" height="80">
+                                    </div>
+                                    <p class="testimonial-text fs-5 fst-italic mb-3">"The AI chatbot is incredibly helpful. I can ask specific questions about my celiac disease and get instant, reliable answers about what foods to avoid."</p>
+                                    <h5 class="mb-1">Michael Rahman</h5>
+                                    <p class="text-muted small">Celiac Disease Patient</p>
+                                    <div class="testimonial-rating text-warning">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 3 -->
+                            <div class="carousel-item">
+                                <div class="testimonial-card text-center p-4">
+                                    <div class="testimonial-img mb-3">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User Testimonial" class="rounded-circle" width="80" height="80">
+                                    </div>
+                                    <p class="testimonial-text fs-5 fst-italic mb-3">"I love how the app suggests personalized meal combinations that are safe for my hypertension. It's like having a nutritionist in my pocket!"</p>
+                                    <h5 class="mb-1">Fatima Ahmed</h5>
+                                    <p class="text-muted small">Hypertension Patient</p>
+                                    <div class="testimonial-rating text-warning">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        
+                        <!-- Carousel Indicators -->
+                        <div class="carousel-indicators" style="bottom: -50px;">
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section py-5 bg-primary text-white text-center">
+        <div class="container">
+            <h2 class="mb-4">Ready to Start Your Health Journey?</h2>
+            <p class="lead mb-4">Join thousands of users who are making healthier food choices every day.</p>
+            <a href="diseases.html" class="btn btn-light btn-lg px-5 py-3 fw-bold">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2023 Smart Digital Food Menu. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbotButton">
+            <i class="fas fa-comment-dots fa-lg"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span><i class="fas fa-robot me-2"></i>Health Assistant</span>
+                <span class="chatbot-close" id="chatbotClose">&times;</span>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your Smart Food Menu AI Assistant. How can I help you with your dietary needs today?
+                </div>
+                <div class="suggested-questions">
+                    <div class="question-chip">What foods are good for Diabetes?</div>
+                    <div class="question-chip">What foods should I avoid with Hypertension?</div>
+                    <div class="question-chip">Can I eat fast food with Arthritis?</div>
+                    <div class="question-chip">What's the best diet for Heart Health?</div>
+                    <div class="question-chip">Which Bangladeshi foods are safe for Osteoporosis?</div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your question here...">
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+    
+    <script>
+        // AI Chatbot Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotButton = document.getElementById('chatbotButton');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+            const openChatbotBtn = document.getElementById('openChatbot');
+            
+            // Toggle chatbot window
+            chatbotButton.addEventListener('click', function() {
+                chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Open chatbot from hero section button
+            if (openChatbotBtn) {
+                openChatbotBtn.addEventListener('click', function() {
+                    chatbotWindow.style.display = 'flex';
+                });
+            }
+            
+            // Close chatbot window
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.style.display = 'none';
+            });
+            
+            // Send message function
+            function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    // Add user message
+                    addMessage(message, 'user');
+                    
+                    // Get bot response
+                    const response = getBotResponse(message);
+                    
+                    // Add bot response with a small delay
+                    setTimeout(() => {
+                        addMessage(response, 'bot');
+                    }, 500);
+                    
+                    // Clear input
+                    chatbotInput.value = '';
+                }
+            }
+            
+            // Add message to chat
+            function addMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+                messageElement.textContent = message;
+                
+                chatbotMessages.appendChild(messageElement);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+            
+            // Get bot response based on user message
+            function getBotResponse(message) {
+                message = message.toLowerCase();
+                
+                // Predefined responses
+                if (message.includes('diabetes') || message.includes('sugar')) {
+                    return "For diabetes, focus on foods with low glycemic index like non-starchy vegetables, whole grains, lean proteins, and healthy fats. Avoid sugary drinks, white bread, pasta, rice, processed sweets, and fruit juices.";
+                } 
+                else if (message.includes('hypertension') || message.includes('blood pressure') || message.includes('high bp')) {
+                    return "For hypertension (high blood pressure), reduce sodium intake by avoiding processed foods, canned soups, and fast food. Focus on potassium-rich foods like bananas, leafy greens, and beets. The DASH diet is recommended.";
+                }
+                else if (message.includes('celiac') || message.includes('gluten')) {
+                    return "For celiac disease, strictly avoid all gluten-containing foods like wheat, barley, and rye. Safe options include rice, potatoes, corn, quinoa, fresh fruits and vegetables, and gluten-free labeled products.";
+                }
+                else if (message.includes('arthritis') || message.includes('joint pain')) {
+                    return "For arthritis, an anti-inflammatory diet is recommended. Include fatty fish (omega-3s), olive oil, nuts, fruits, vegetables, and whole grains. Avoid processed foods, red meat, and foods high in added sugars.";
+                }
+                else if (message.includes('heart') || message.includes('cardiac') || message.includes('cardiovascular')) {
+                    return "For heart health, focus on a Mediterranean-style diet with plenty of fruits, vegetables, whole grains, fish, and olive oil. Limit saturated fats, trans fats, sodium, and added sugars.";
+                }
+                else if (message.includes('osteoporosis') || message.includes('bone') && message.includes('bangladeshi')) {
+                    return "For osteoporosis, Bangladeshi foods that are good include fish curry with bones (calcium), dairy-based desserts like mishti doi, spinach curry (pui shak), and lentil soups (dal). Ensure adequate vitamin D through sunlight exposure too.";
+                }
+                else if (message.includes('fast food') && message.includes('arthritis')) {
+                    return "It's best to avoid fast food if you have arthritis. Most fast foods are high in inflammatory ingredients like refined carbs, processed meats, and unhealthy fats that can worsen joint pain and inflammation.";
+                }
+                else if (message.includes('lactose') || message.includes('dairy')) {
+                    return "For lactose intolerance, avoid milk, ice cream, soft cheeses, and regular yogurt. Try lactose-free dairy products, plant-based milks, hard aged cheeses, and calcium-fortified foods instead.";
+                }
+                else if (message.includes('kidney')) {
+                    return "For kidney disease, limit foods high in sodium, potassium, and phosphorus. Reduce protein intake and focus on high-quality proteins. Avoid processed foods and consult with a dietitian for personalized advice.";
+                }
+                else if (message.includes('gout')) {
+                    return "For gout, avoid high-purine foods like organ meats, red meat, seafood (especially shellfish), and alcohol (especially beer). Focus on low-fat dairy, plant proteins, whole grains, and plenty of water.";
+                }
+                else if (message.includes('ibs') || message.includes('irritable bowel')) {
+                    return "For IBS, consider a low-FODMAP diet. Avoid trigger foods like caffeine, alcohol, spicy foods, and fried foods. Soluble fiber foods, lean proteins, cooked vegetables, and gluten-free grains may help.";
+                }
+                else {
+                    return "I'm not sure about that specific dietary question. Would you like information about diabetes, hypertension, celiac disease, arthritis, heart health, or other conditions?";
+                }
+            }
+            
+            // Send message on button click
+            chatbotSend.addEventListener('click', sendMessage);
+            
+            // Send message on Enter key
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Handle suggested questions
+            document.querySelectorAll('.question-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const question = this.textContent;
+                    chatbotInput.value = question;
+                    sendMessage();
+                });
+            });
+            
+            // Quick Disease Selector functionality
+            const quickDiseaseSelect = document.getElementById('quickDiseaseSelect');
+            const quickDiseaseGo = document.getElementById('quickDiseaseGo');
+            
+            if (quickDiseaseGo) {
+                quickDiseaseGo.addEventListener('click', function() {
+                    const selectedDisease = quickDiseaseSelect.value;
+                    if (selectedDisease && selectedDisease !== 'Select a health condition...') {
+                        // Store selected disease in localStorage
+                        localStorage.setItem('selectedDiseases', JSON.stringify([selectedDisease]));
+                        // Redirect to menu page
+                        window.location.href = 'menu.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
