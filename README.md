@@ -351,6 +351,11 @@ The database is designed to seamlessly integrate with your existing frontend whi
 
 ---
 
+## Database Design & Operational Best Practices
+
+See `database_design.md` for a focused guide on indexing, joins, pooling, high availability, backups, and other operational topics.
+
+
 **Need Help?** 
 - Check the API documentation: `http://localhost:5000/` 
 - Review the sample queries in `database_examples.sql`
