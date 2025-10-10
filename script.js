@@ -1,5 +1,54 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Modern Toast Notification System
+    function showToast(message, type = 'info', title = 'Notification') {
+        const toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) return;
+
+        const toast = toastContainer.querySelector('#liveToast');
+        const toastTitle = toast.querySelector('.toast-title');
+        const toastBody = toast.querySelector('.toast-body');
+        const toastIcon = toast.querySelector('.toast-icon');
+
+        // Set content
+        toastTitle.textContent = title;
+        toastBody.textContent = message;
+
+        // Set type styling
+        toast.className = `toast toast-${type}`;
+
+        // Show toast
+        const bsToast = new bootstrap.Toast(toast, {
+            autohide: true,
+            delay: 4000
+        });
+        bsToast.show();
+    }
+
+    // Modern Animation System with Intersection Observer
+    const animationObserverOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                animationObserver.unobserve(entry.target);
+            }
+        });
+    }, animationObserverOptions);
+
+    // Observe all cards for animation
+    document.querySelectorAll('.animate-card, .food-item').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        animationObserver.observe(card);
+    });
+
     // Shopping Cart Management
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
@@ -35,9 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             addToCart(foodName, foodPrice);
             
-            // Redirect to checkout
-            alert(`Proceeding to checkout for ${foodName} - $${foodPrice.toFixed(2)}`);
-            viewCart();
+            // Show toast and redirect to checkout
+            showToast(`Added ${foodName} to cart - $${foodPrice.toFixed(2)}`, 'success', 'Quick Purchase');
+            setTimeout(() => {
+                viewCart();
+            }, 800);
         });
     });
     
@@ -78,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function viewCart() {
         if (cart.length === 0) {
-            alert('Your cart is empty!');
+            showToast('Your cart is empty! Add some delicious items first.', 'info', 'Empty Cart');
             return;
         }
         
@@ -122,13 +173,13 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             document.querySelector('[style*="position: fixed"]')?.remove();
-            alert('Cart cleared!');
+            showToast('Cart cleared successfully!', 'info', 'Cart Updated');
         }
     };
     
     window.checkout = function() {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        alert(`Checkout Total: $${total.toFixed(2)}\n\nThank you for your order!\nThis is a demo - payment integration would go here.`);
+        showToast(`Thank you for your order! Total: $${total.toFixed(2)} - Demo checkout completed`, 'success', 'Order Placed');
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
@@ -144,17 +195,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const checkedDiseases = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(checkbox => checkbox.value);
             
-            // Display alert with selected diseases
+            // Show modern notification and redirect
             if (checkedDiseases.length > 0) {
-                alert('Diseases submitted! Foods will be filtered based on: ' + checkedDiseases.join(', '));
+                showToast(`Filtering foods for: ${checkedDiseases.join(', ')}`, 'success', 'Health Conditions Set');
                 
                 // Store selected diseases in localStorage for use in menu page
                 localStorage.setItem('selectedDiseases', JSON.stringify(checkedDiseases));
                 
-                // Redirect to menu page
-                window.location.href = 'menu.html';
+                // Redirect to menu page with smooth transition
+                setTimeout(() => {
+                    window.location.href = 'menu.html';
+                }, 1500);
             } else {
-                alert('Please select at least one health condition.');
+                showToast('Please select at least one health condition to continue.', 'error', 'Selection Required');
             }
         });
     }
@@ -172,10 +225,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Simple validation
             if (name && email && message) {
-                alert('Message sent! Thank you for contacting us, ' + name + '.');
+                showToast(`Thank you for contacting us, ${name}! We'll get back to you soon.`, 'success', 'Message Sent');
                 contactForm.reset();
             } else {
-                alert('Please fill in all fields.');
+                showToast('Please fill in all required fields to send your message.', 'error', 'Incomplete Form');
             }
         });
     }
