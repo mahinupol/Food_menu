@@ -65,19 +65,19 @@ INSERT INTO nutrition_facts (food_id, calories, protein_g, carbs_g, fat_g, satur
 
 -- Food Allergens 
 INSERT INTO food_allergens (food_id, allergen_id, severity_level) VALUES
--- Hamburger contains gluten and soy
+-- Hamburger 
 (1, 1, 'Contains'),
 (1, 4, 'Contains'),
--- Pizza contains gluten and dairy
+-- Pizza 
 (3, 1, 'Contains'),
 (3, 2, 'Contains'),
--- Chocolate Cake contains gluten, dairy, and eggs
+-- Chocolate Cake 
 (6, 1, 'Contains'),
 (6, 2, 'Contains'),
 (6, 3, 'Contains'),
--- Grilled Salmon contains fish
+-- Grilled Salmon 
 (5, 7, 'Contains'),
--- Tandoori Chicken contains dairy
+-- Tandoori Chicken 
 (10, 2, 'Contains');
 
 --  Food Recommendations based on health conditions
@@ -149,7 +149,7 @@ INSERT INTO user_health_conditions (user_id, condition_id, severity, diagnosed_d
 (2, 2, 'Severe', '2019-06-20', TRUE),    --  has celiac disease
 (3, 6, 'Moderate', '2022-02-14', TRUE);  --  has gout
 
--- Insert sample meal plans
+-- sample meal plans
 INSERT INTO user_meal_plans (user_id, plan_name, plan_date, meal_type, food_id, portion_size, portion_unit, calories_consumed, is_completed) VALUES
 (1, 'Diabetes-Friendly Daily Plan', '2024-01-15', 'Breakfast', 8, 1, 'cup', 230, TRUE),
 (1, 'Diabetes-Friendly Daily Plan', '2024-01-15', 'Lunch', 4, 150, 'grams', 248, TRUE),

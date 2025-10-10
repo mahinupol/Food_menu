@@ -1,26 +1,139 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    if (darkModeToggle) {
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-        }
-        
-        darkModeToggle.addEventListener('click', function() {
-            if (document.body.classList.contains('dark-mode')) {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-            } else {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-            }
+    // Shopping Cart Management
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Update cart count on page load
+    updateCartCount();
+    
+    // Add to Cart functionality
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const foodName = this.getAttribute('data-food');
+            const foodPrice = parseFloat(this.getAttribute('data-price'));
+            
+            addToCart(foodName, foodPrice);
+            
+            // Visual feedback
+            this.innerHTML = '<i class="fas fa-check"></i> Added!';
+            this.classList.add('btn-secondary');
+            this.classList.remove('btn-success');
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                this.classList.add('btn-success');
+                this.classList.remove('btn-secondary');
+            }, 1500);
+        });
+    });
+    
+    // Buy Now functionality
+    document.querySelectorAll('.buy-now-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const foodName = this.getAttribute('data-food');
+            const foodPrice = parseFloat(this.getAttribute('data-price'));
+            
+            addToCart(foodName, foodPrice);
+            
+            // Redirect to checkout
+            alert(`Proceeding to checkout for ${foodName} - $${foodPrice.toFixed(2)}`);
+            viewCart();
+        });
+    });
+    
+    // View Cart button
+    const viewCartBtn = document.getElementById('viewCartBtn');
+    if (viewCartBtn) {
+        viewCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            viewCart();
         });
     }
+    
+    // Cart functions
+    function addToCart(name, price) {
+        const existingItem = cart.find(item => item.name === name);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1
+            });
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+    }
+    
+    function updateCartCount() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCountElements = document.querySelectorAll('#cartCount');
+        cartCountElements.forEach(el => {
+            el.textContent = totalItems;
+        });
+    }
+    
+    function viewCart() {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        
+        let cartHTML = '<div style="max-width: 600px;">';
+        cartHTML += '<h3 style="margin-bottom: 20px;">Shopping Cart</h3>';
+        cartHTML += '<table style="width: 100%; border-collapse: collapse;">';
+        cartHTML += '<tr style="border-bottom: 2px solid #ddd;"><th style="text-align: left; padding: 10px;">Item</th><th style="padding: 10px;">Qty</th><th style="text-align: right; padding: 10px;">Price</th><th style="text-align: right; padding: 10px;">Total</th></tr>';
+        
+        let total = 0;
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            cartHTML += `<tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">${item.name}</td>
+                <td style="text-align: center; padding: 10px;">${item.quantity}</td>
+                <td style="text-align: right; padding: 10px;">$${item.price.toFixed(2)}</td>
+                <td style="text-align: right; padding: 10px;">$${itemTotal.toFixed(2)}</td>
+            </tr>`;
+        });
+        
+        cartHTML += `<tr style="font-weight: bold; font-size: 1.2em;">
+            <td colspan="3" style="text-align: right; padding: 15px;">Total:</td>
+            <td style="text-align: right; padding: 15px;">$${total.toFixed(2)}</td>
+        </tr>`;
+        cartHTML += '</table>';
+        cartHTML += '<div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">';
+        cartHTML += '<button onclick="clearCart()" style="padding: 10px 20px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear Cart</button>';
+        cartHTML += '<button onclick="checkout()" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Checkout</button>';
+        cartHTML += '</div></div>';
+        
+        const cartModal = document.createElement('div');
+        cartModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 10000;';
+        cartModal.innerHTML = `<div style="background: white; padding: 30px; border-radius: 10px; max-height: 80vh; overflow-y: auto;">${cartHTML}<button onclick="this.parentElement.parentElement.remove()" style="margin-top: 15px; padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button></div>`;
+        document.body.appendChild(cartModal);
+    }
+    
+    // Global functions for cart modal
+    window.clearCart = function() {
+        if (confirm('Are you sure you want to clear your cart?')) {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            document.querySelector('[style*="position: fixed"]')?.remove();
+            alert('Cart cleared!');
+        }
+    };
+    
+    window.checkout = function() {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        alert(`Checkout Total: $${total.toFixed(2)}\n\nThank you for your order!\nThis is a demo - payment integration would go here.`);
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        document.querySelector('[style*="position: fixed"]')?.remove();
+    };
     // Disease Form Submission
     const diseaseForm = document.getElementById('diseaseForm');
     if (diseaseForm) {

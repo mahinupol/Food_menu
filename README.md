@@ -355,6 +355,19 @@ The database is designed to seamlessly integrate with your existing frontend whi
 
 See `database_design.md` for a focused guide on indexing, joins, pooling, high availability, backups, and other operational topics.
 
+<!-- database_design.md covers the teacher's requested topics:
+  - DB design & Table indexing (see 'Table Indexing')
+  - Join Query (see 'Join Queries')
+  - Best optimization (see 'Query Optimization Best Practices')
+  - DB connection & Pooling (see 'DB Connection & Pooling')
+  - Multi DB / Read Pool / Write Pool (see 'Multi-DB & Read/Write Pools')
+  - Singleton pattern (see 'Singleton Connection Manager Pattern')
+  - Normalization (see 'Normalization & When to Denormalize')
+  - Fallback / Retry (see 'Fallback / Retry (Resilience)')
+  - High Availability (see 'High Availability')
+  - Backup (see 'Backup & Recovery')
+-->
+
 
 **Need Help?** 
 - Check the API documentation: `http://localhost:5000/` 
