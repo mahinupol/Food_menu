@@ -29,36 +29,54 @@ document.addEventListener('DOMContentLoaded', function() {
     const healthCards = document.querySelectorAll('.health-card');
     healthCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Remove selected state from all cards
-            healthCards.forEach(c => c.classList.remove('selected'));
-            
-            // Add selected state to clicked card
-            this.classList.add('selected');
-            
             const condition = this.getAttribute('data-condition');
             
-            // Show toast notification
-            showToast(`${this.querySelector('.health-card-title').textContent} selected!`, 'success', '✓ Selected');
+            // Find the corresponding checkbox
+            const checkbox = document.getElementById(condition);
             
-            // Store selected condition
-            localStorage.setItem('selectedCondition', condition);
-            
-            // Check if we're on the diseases page or homepage
-            const isDiseasesPage = window.location.pathname.includes('diseases.html');
-            
-            if (isDiseasesPage) {
-                // On diseases page - set as single selection and redirect to menu
-                localStorage.setItem('selectedDiseases', JSON.stringify([condition]));
-                setTimeout(() => {
-                    window.location.href = 'menu.html';
-                }, 1200);
+            if (checkbox) {
+                // Toggle checkbox
+                checkbox.checked = !checkbox.checked;
+                
+                // Update card visual state
+                if (checkbox.checked) {
+                    this.classList.add('selected');
+                    showToast(`${this.querySelector('.health-card-title').textContent} added!`, 'success', '✓ Added');
+                } else {
+                    this.classList.remove('selected');
+                    showToast(`${this.querySelector('.health-card-title').textContent} removed!`, 'info', '✕ Removed');
+                }
+                
+                // Store selected condition
+                localStorage.setItem('selectedCondition', condition);
             } else {
                 // On homepage - redirect to diseases page
-                setTimeout(() => {
-                    window.location.href = 'assets/diseases.html?condition=' + condition;
-                }, 1200);
+                const isDiseasesPage = window.location.pathname.includes('diseases.html');
+                
+                if (!isDiseasesPage) {
+                    // Show toast notification
+                    showToast(`${this.querySelector('.health-card-title').textContent} selected!`, 'success', '✓ Selected');
+                    
+                    // Store selected condition
+                    localStorage.setItem('selectedCondition', condition);
+                    
+                    // Redirect to diseases page after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'assets/diseases.html?condition=' + condition;
+                    }, 1200);
+                }
             }
         });
+    });
+    
+    // Sync card selection state with checkboxes on page load (for diseases page)
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        if (checkbox.checked) {
+            const cardElement = document.querySelector(`.health-card[data-condition="${checkbox.value}"]`);
+            if (cardElement) {
+                cardElement.classList.add('selected');
+            }
+        }
     });
 
     // Modern Animation System with Intersection Observer
