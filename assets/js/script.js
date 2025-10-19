@@ -25,6 +25,31 @@ document.addEventListener('DOMContentLoaded', function() {
         bsToast.show();
     }
 
+    // Health Condition Card Selection
+    const healthCards = document.querySelectorAll('.health-card');
+    healthCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove selected state from all cards
+            healthCards.forEach(c => c.classList.remove('selected'));
+            
+            // Add selected state to clicked card
+            this.classList.add('selected');
+            
+            const condition = this.getAttribute('data-condition');
+            
+            // Show toast notification
+            showToast(`${this.querySelector('.health-card-title').textContent} selected!`, 'success', '✓ Selected');
+            
+            // Store selected condition
+            localStorage.setItem('selectedCondition', condition);
+            
+            // Redirect to diseases page after a short delay
+            setTimeout(() => {
+                window.location.href = 'assets/diseases.html?condition=' + condition;
+            }, 1200);
+        });
+    });
+
     // Modern Animation System with Intersection Observer
     const animationObserverOptions = {
         threshold: 0.1,
@@ -98,8 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCartBtn.addEventListener('click', function(e) {
             e.preventDefault();
             viewCart();
-        });
-    }
     
     // Cart functions
     function addToCart(name, price) {
