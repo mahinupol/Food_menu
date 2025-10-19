@@ -43,10 +43,21 @@ document.addEventListener('DOMContentLoaded', function() {
             // Store selected condition
             localStorage.setItem('selectedCondition', condition);
             
-            // Redirect to diseases page after a short delay
-            setTimeout(() => {
-                window.location.href = 'assets/diseases.html?condition=' + condition;
-            }, 1200);
+            // Check if we're on the diseases page or homepage
+            const isDiseasesPage = window.location.pathname.includes('diseases.html');
+            
+            if (isDiseasesPage) {
+                // On diseases page - set as single selection and redirect to menu
+                localStorage.setItem('selectedDiseases', JSON.stringify([condition]));
+                setTimeout(() => {
+                    window.location.href = 'menu.html';
+                }, 1200);
+            } else {
+                // On homepage - redirect to diseases page
+                setTimeout(() => {
+                    window.location.href = 'assets/diseases.html?condition=' + condition;
+                }, 1200);
+            }
         });
     });
 
@@ -123,6 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCartBtn.addEventListener('click', function(e) {
             e.preventDefault();
             viewCart();
+        });
+    }
     
     // Cart functions
     function addToCart(name, price) {
