@@ -426,6 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     );
                     
                     let mealHtml = '';
+                    // Store recommended items as { name, price }
                     let recommendedItems = [];
                     
                     // Add a protein if available
@@ -433,8 +434,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         const randomProtein = proteins[Math.floor(Math.random() * proteins.length)];
                         const proteinName = randomProtein.querySelector('.card-title').textContent;
                         const proteinImg = randomProtein.querySelector('img').getAttribute('src');
-                        const proteinId = randomProtein.getAttribute('id');
-                        recommendedItems.push(proteinId);
+                        // Find price from any add-to-cart button within this card
+                        const proteinPriceBtn = randomProtein.querySelector('.add-to-cart-btn');
+                        const proteinPrice = proteinPriceBtn ? parseFloat(proteinPriceBtn.getAttribute('data-price')) : 0;
+                        recommendedItems.push({ name: proteinName, price: proteinPrice });
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -454,8 +457,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         const randomSide = sides[Math.floor(Math.random() * sides.length)];
                         const sideName = randomSide.querySelector('.card-title').textContent;
                         const sideImg = randomSide.querySelector('img').getAttribute('src');
-                        const sideId = randomSide.getAttribute('id');
-                        recommendedItems.push(sideId);
+                        const sidePriceBtn = randomSide.querySelector('.add-to-cart-btn');
+                        const sidePrice = sidePriceBtn ? parseFloat(sidePriceBtn.getAttribute('data-price')) : 0;
+                        recommendedItems.push({ name: sideName, price: sidePrice });
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -475,8 +479,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
                         const drinkName = randomDrink.querySelector('.card-title').textContent;
                         const drinkImg = randomDrink.querySelector('img').getAttribute('src');
-                        const drinkId = randomDrink.getAttribute('id');
-                        recommendedItems.push(drinkId);
+                        const drinkPriceBtn = randomDrink.querySelector('.add-to-cart-btn');
+                        const drinkPrice = drinkPriceBtn ? parseFloat(drinkPriceBtn.getAttribute('data-price')) : 0;
+                        recommendedItems.push({ name: drinkName, price: drinkPrice });
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -508,13 +513,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (addAllBtn) {
                         addAllBtn.addEventListener('click', function() {
                             const items = JSON.parse(this.getAttribute('data-items'));
-                            items.forEach(itemId => {
-                                const foodItem = document.getElementById(itemId);
-                                if (foodItem) {
-                                    addToCart(foodItem);
+                            let addedCount = 0;
+                            items.forEach(item => {
+                                if (item && item.name) {
+                                    const price = typeof item.price === 'number' && !isNaN(item.price) ? item.price : 0;
+                                    addToCart(item.name, price);
+                                    addedCount += 1;
                                 }
                             });
-                            showToast(`Added all 3 meals to cart!`, 'success');
+                            const msg = addedCount > 0 ? `Added ${addedCount} item(s) to cart!` : 'No items to add to cart.';
+                            showToast(msg, addedCount > 0 ? 'success' : 'info');
                         });
                     }
                 }
