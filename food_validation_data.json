@@ -1,0 +1,357 @@
+{
+  "foods": {
+    "biryani": {
+      "name": "Biryani",
+      "price": 8.99,
+      "calories": 450,
+      "sodium_mg": 850,
+      "sugar_g": 2,
+      "protein_g": 18,
+      "fiber_g": 3,
+      "fat_g": 12,
+      "carbs_g": 65,
+      "gluten": true,
+      "lactose": false,
+      "purine_level": "high",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "High carbs"},
+        "celiac": {"status": "avoid", "reason": "Contains gluten"},
+        "hypertension": {"status": "caution", "reason": "High sodium"},
+        "kidney": {"status": "caution", "reason": "High sodium"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "caution", "reason": "High purine"},
+        "ibs": {"status": "caution", "reason": "Moderate fat"}
+      }
+    },
+    "tandoori": {
+      "name": "Tandoori Chicken",
+      "price": 9.99,
+      "calories": 280,
+      "sodium_mg": 650,
+      "sugar_g": 1,
+      "protein_g": 35,
+      "fiber_g": 0,
+      "fat_g": 8,
+      "carbs_g": 5,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "medium",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "Low fiber"},
+        "celiac": {"status": "caution", "reason": "Low fiber"},
+        "hypertension": {"status": "safe", "reason": "Lean protein"},
+        "kidney": {"status": "caution", "reason": "High protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "caution", "reason": "Medium purine"},
+        "ibs": {"status": "caution", "reason": "Low fiber"}
+      }
+    },
+    "salmon": {
+      "name": "Grilled Salmon",
+      "price": 14.99,
+      "calories": 350,
+      "sodium_mg": 500,
+      "sugar_g": 0,
+      "protein_g": 40,
+      "fiber_g": 0,
+      "fat_g": 20,
+      "carbs_g": 0,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "high",
+      "omega3": true,
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "Low fiber"},
+        "celiac": {"status": "caution", "reason": "Low fiber"},
+        "hypertension": {"status": "safe", "reason": "Omega-3 rich"},
+        "kidney": {"status": "caution", "reason": "High protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "caution", "reason": "High purine - seafood"},
+        "ibs": {"status": "caution", "reason": "Low fiber, high fat"}
+      }
+    },
+    "steak": {
+      "name": "Grilled Steak",
+      "price": 16.99,
+      "calories": 420,
+      "sodium_mg": 700,
+      "sugar_g": 0,
+      "protein_g": 45,
+      "fiber_g": 0,
+      "fat_g": 25,
+      "carbs_g": 0,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "very_high",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "High calories"},
+        "celiac": {"status": "caution", "reason": "Low fiber"},
+        "hypertension": {"status": "caution", "reason": "High fat and sodium"},
+        "kidney": {"status": "avoid", "reason": "Very high protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "avoid", "reason": "Very high purine - red meat"},
+        "ibs": {"status": "avoid", "reason": "High fat"}
+      }
+    },
+    "pizza": {
+      "name": "Vegetable Pizza",
+      "price": 10.99,
+      "calories": 380,
+      "sodium_mg": 920,
+      "sugar_g": 4,
+      "protein_g": 14,
+      "fiber_g": 5,
+      "fat_g": 14,
+      "carbs_g": 52,
+      "gluten": true,
+      "lactose": true,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "High carbs and sodium"},
+        "celiac": {"status": "avoid", "reason": "Contains gluten"},
+        "hypertension": {"status": "avoid", "reason": "High sodium"},
+        "kidney": {"status": "avoid", "reason": "High sodium"},
+        "lactose": {"status": "avoid", "reason": "Contains lactose"},
+        "gout": {"status": "caution", "reason": "High sodium"},
+        "ibs": {"status": "safe", "reason": "Good fiber"}
+      }
+    },
+    "hamburger": {
+      "name": "Hamburger",
+      "price": 7.99,
+      "calories": 520,
+      "sodium_mg": 1100,
+      "sugar_g": 8,
+      "protein_g": 28,
+      "fiber_g": 2,
+      "fat_g": 28,
+      "carbs_g": 48,
+      "gluten": true,
+      "lactose": true,
+      "purine_level": "high",
+      "validation": {
+        "diabetes": {"status": "avoid", "reason": "High calories, sugar, carbs"},
+        "celiac": {"status": "avoid", "reason": "Contains gluten"},
+        "hypertension": {"status": "avoid", "reason": "Very high sodium"},
+        "kidney": {"status": "avoid", "reason": "High sodium and protein"},
+        "lactose": {"status": "avoid", "reason": "Contains lactose"},
+        "gout": {"status": "avoid", "reason": "High purine and sodium"},
+        "ibs": {"status": "avoid", "reason": "High fat and sodium"}
+      }
+    },
+    "chocolate_cake": {
+      "name": "Chocolate Cake",
+      "price": 5.99,
+      "calories": 380,
+      "sodium_mg": 200,
+      "sugar_g": 45,
+      "protein_g": 4,
+      "fiber_g": 2,
+      "fat_g": 18,
+      "carbs_g": 52,
+      "gluten": true,
+      "lactose": true,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "avoid", "reason": "Very high sugar"},
+        "celiac": {"status": "avoid", "reason": "Contains gluten"},
+        "hypertension": {"status": "avoid", "reason": "High fat and calories"},
+        "kidney": {"status": "safe", "reason": "Low sodium"},
+        "lactose": {"status": "avoid", "reason": "Contains lactose"},
+        "gout": {"status": "caution", "reason": "High sugar"},
+        "ibs": {"status": "caution", "reason": "High fat"}
+      }
+    },
+    "grilled_meat": {
+      "name": "Grilled Meat",
+      "price": 12.99,
+      "calories": 340,
+      "sodium_mg": 600,
+      "sugar_g": 0,
+      "protein_g": 40,
+      "fiber_g": 0,
+      "fat_g": 18,
+      "carbs_g": 0,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "high",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "Low fiber"},
+        "celiac": {"status": "caution", "reason": "Low fiber"},
+        "hypertension": {"status": "caution", "reason": "Moderate sodium"},
+        "kidney": {"status": "caution", "reason": "High protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "avoid", "reason": "High purine - red meat"},
+        "ibs": {"status": "caution", "reason": "Low fiber, high fat"}
+      }
+    },
+    "rice": {
+      "name": "Rice",
+      "price": 3.99,
+      "calories": 206,
+      "sodium_mg": 2,
+      "sugar_g": 0,
+      "protein_g": 4,
+      "fiber_g": 0.3,
+      "fat_g": 0.3,
+      "carbs_g": 45,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "Moderate carbs, low fiber"},
+        "celiac": {"status": "safe", "reason": "Gluten-free"},
+        "hypertension": {"status": "safe", "reason": "Very low sodium"},
+        "kidney": {"status": "safe", "reason": "Low sodium and protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "safe", "reason": "Low purine"},
+        "ibs": {"status": "caution", "reason": "Low fiber"}
+      }
+    },
+    "lentils": {
+      "name": "Lentil Curry",
+      "price": 6.99,
+      "calories": 230,
+      "sodium_mg": 500,
+      "sugar_g": 2,
+      "protein_g": 18,
+      "fiber_g": 8,
+      "fat_g": 3,
+      "carbs_g": 40,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "medium",
+      "validation": {
+        "diabetes": {"status": "safe", "reason": "High fiber, low sugar"},
+        "celiac": {"status": "safe", "reason": "Gluten-free, good fiber"},
+        "hypertension": {"status": "caution", "reason": "Moderate sodium"},
+        "kidney": {"status": "safe", "reason": "Moderate protein and sodium"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "caution", "reason": "Medium purine"},
+        "ibs": {"status": "safe", "reason": "High fiber, low fat"}
+      }
+    },
+    "fruit": {
+      "name": "Mixed Fruit Salad",
+      "price": 5.49,
+      "calories": 80,
+      "sodium_mg": 20,
+      "sugar_g": 18,
+      "protein_g": 1,
+      "fiber_g": 3,
+      "fat_g": 0,
+      "carbs_g": 21,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "caution", "reason": "Moderate sugar"},
+        "celiac": {"status": "safe", "reason": "Naturally gluten-free"},
+        "hypertension": {"status": "safe", "reason": "Very low sodium"},
+        "kidney": {"status": "safe", "reason": "Low sodium and protein"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "safe", "reason": "Low purine"},
+        "ibs": {"status": "safe", "reason": "High fiber, low fat"}
+      }
+    },
+    "green_tea": {
+      "name": "Green Tea",
+      "price": 2.99,
+      "calories": 2,
+      "sodium_mg": 5,
+      "sugar_g": 0,
+      "protein_g": 0,
+      "fiber_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "safe", "reason": "Virtually no calories"},
+        "celiac": {"status": "safe", "reason": "Naturally gluten-free"},
+        "hypertension": {"status": "safe", "reason": "No sodium"},
+        "kidney": {"status": "safe", "reason": "Kidney-friendly"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "safe", "reason": "Antioxidant rich"},
+        "ibs": {"status": "safe", "reason": "Soothing"}
+      }
+    },
+    "bottle": {
+      "name": "Water Bottle",
+      "price": 1.99,
+      "calories": 0,
+      "sodium_mg": 0,
+      "sugar_g": 0,
+      "protein_g": 0,
+      "fiber_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "gluten": false,
+      "lactose": false,
+      "purine_level": "low",
+      "validation": {
+        "diabetes": {"status": "safe", "reason": "Hydration essential"},
+        "celiac": {"status": "safe", "reason": "No gluten"},
+        "hypertension": {"status": "safe", "reason": "No sodium"},
+        "kidney": {"status": "safe", "reason": "Pure hydration"},
+        "lactose": {"status": "safe", "reason": "No lactose"},
+        "gout": {"status": "safe", "reason": "Helps flush purines"},
+        "ibs": {"status": "safe", "reason": "Essential fluid"}
+      }
+    }
+  },
+  "disease_guidelines": {
+    "diabetes": {
+      "safe_count": 6,
+      "caution_count": 4,
+      "avoid_count": 3,
+      "key_nutrients": ["High fiber", "Low sugar", "Lean protein"],
+      "target_sugar_max": "15g per serving",
+      "target_carbs_max": "50g per serving"
+    },
+    "celiac": {
+      "safe_count": 7,
+      "caution_count": 3,
+      "avoid_count": 3,
+      "key_nutrients": ["Gluten-free", "Good fiber", "Nutrient dense"],
+      "critical": "Must avoid all gluten-containing foods"
+    },
+    "hypertension": {
+      "safe_count": 7,
+      "caution_count": 3,
+      "avoid_count": 3,
+      "key_nutrients": ["Low sodium", "Lean protein", "Rich in potassium"],
+      "target_sodium_max": "600mg per serving"
+    },
+    "kidney": {
+      "safe_count": 5,
+      "caution_count": 4,
+      "avoid_count": 4,
+      "key_nutrients": ["Low sodium", "Moderate protein", "Kidney-friendly"],
+      "target_sodium_max": "400mg per serving",
+      "target_protein_max": "25g per serving"
+    },
+    "lactose": {
+      "safe_count": 11,
+      "caution_count": 0,
+      "avoid_count": 2,
+      "key_nutrients": ["Lactose-free", "Calcium alternatives"],
+      "critical": "Must avoid all dairy products"
+    },
+    "gout": {
+      "safe_count": 5,
+      "caution_count": 5,
+      "avoid_count": 3,
+      "key_nutrients": ["Low purine", "Stay hydrated", "Limit red meat"],
+      "avoid_foods": ["Red meat", "Organ meats", "Certain seafood"]
+    },
+    "ibs": {
+      "safe_count": 4,
+      "caution_count": 5,
+      "avoid_count": 4,
+      "key_nutrients": ["High fiber", "Low fat", "Easy to digest"],
+      "target_fat_max": "10g per serving"
+    }
+  }
+}
