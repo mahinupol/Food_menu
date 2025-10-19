@@ -379,7 +379,7 @@ body {
 .card {
     border: none;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
     overflow: hidden;
     text-align: center;
@@ -391,7 +391,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
 .card-img-top.food-image {
@@ -595,136 +595,6 @@ footer {
     color: white;
 }
 
-/* Dark Mode */
-body.dark-mode {
-    background-color: #0a1929;
-    color: #f0f0f0;
-}
-
-body.dark-mode .card {
-    background-color: #132f4c;
-    color: #f0f0f0;
-    border-color: #173a5e;
-}
-
-body.dark-mode .card-body {
-    background-color: #132f4c;
-}
-
-body.dark-mode .text-muted {
-    color: #b0bec5 !important;
-}
-
-body.dark-mode .logo,
-body.dark-mode .logo-menu,
-body.dark-mode .hero-logo,
-body.dark-mode .about-logo {
-    border-color: #2e7d32;
-    box-shadow: 0 0 8px rgba(46, 125, 50, 0.5);
-}
-
-body.dark-mode .navbar {
-    background-color: #071a2e !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .footer {
-    background-color: #071a2e !important;
-}
-
-body.dark-mode .nutrition-details {
-    background-color: #173a5e;
-    color: #f0f0f0;
-    border-color: #2a4d69;
-}
-
-body.dark-mode .allergen-filter .card,
-body.dark-mode .recommended-today-section .card {
-    background-color: #132f4c;
-    border-color: #2a4d69;
-}
-
-body.dark-mode .allergen-filter .card-header {
-    background-color: #9c7a00;
-    color: #ffffff;
-}
-
-body.dark-mode .recommended-today-section .card-header {
-    background-color: #2e7d32;
-    color: #ffffff;
-}
-
-body.dark-mode .modal-content {
-    background-color: #132f4c;
-    color: #f0f0f0;
-    border-color: #173a5e;
-}
-
-body.dark-mode .modal-header {
-    border-bottom-color: #173a5e;
-}
-
-body.dark-mode .modal-footer {
-    border-top-color: #173a5e;
-}
-
-/* Dark mode button styles */
-body.dark-mode .btn-primary {
-    background-color: #1976d2;
-    border-color: #1565c0;
-}
-
-body.dark-mode .btn-primary:hover,
-body.dark-mode .btn-primary:focus {
-    background-color: #1565c0;
-    border-color: #0d47a1;
-}
-
-body.dark-mode .btn-success {
-    background-color: #2e7d32;
-    border-color: #1b5e20;
-}
-
-body.dark-mode .btn-success:hover,
-body.dark-mode .btn-success:focus {
-    background-color: #1b5e20;
-    border-color: #103e13;
-}
-
-body.dark-mode .btn-warning {
-    background-color: #ff8f00;
-    border-color: #ff6f00;
-    color: #000;
-}
-
-body.dark-mode .btn-warning:hover,
-body.dark-mode .btn-warning:focus {
-    background-color: #ff6f00;
-    border-color: #ff6f00;
-    color: #000;
-}
-
-/* Dark mode form elements */
-body.dark-mode .form-control,
-body.dark-mode .form-select {
-    background-color: #173a5e;
-    border-color: #2a4d69;
-    color: #f0f0f0;
-}
-
-body.dark-mode .form-control:focus,
-body.dark-mode .form-select:focus {
-    background-color: #173a5e;
-    border-color: #1976d2;
-    color: #f0f0f0;
-    box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
-}
-
-body.dark-mode .input-group-text {
-    background-color: #173a5e;
-    border-color: #2a4d69;
-    color: #f0f0f0;
-}
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -744,17 +614,7 @@ body.dark-mode .input-group-text {
     background: #388e3c;
 }
 
-body.dark-mode ::-webkit-scrollbar-track {
-    background: #0a1929;
-}
-
-body.dark-mode ::-webkit-scrollbar-thumb {
-    background: #2e7d32;
-}
-
-body.dark-mode ::-webkit-scrollbar-thumb:hover {
-    background: #388e3c;
-}
+ 
 
 /* Smart Search Styling */
 .search-tags {

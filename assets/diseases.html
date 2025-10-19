@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Selection - Smart Digital Food Menu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f4eb, #b0e2ce 65%, #74d2ac 100%);
+        }
+    </style>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="img/logo/849846e2-5103-46b1-b286-a21d06ebb963.png" alt="Smart Digital Food Menu Logo" class="logo me-2">
+                <span>Smart Digital Food Menu</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="diseases.html">Diseases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">Food Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="viewCartBtn">
+                            <i class="fas fa-shopping-cart"></i> Cart <span class="badge bg-danger" id="cartCount">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Disease Selection Section -->
+    <section class="disease-section py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Select Your Health Condition</h1>
+            
+            <form id="diseaseForm">
+                <div class="row g-4 justify-content-center">
+                    <!-- Diabetes -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="diabetes" id="diabetes">
+                                <label class="form-check-label d-flex align-items-center" for="diabetes">
+                                    <img src="img/sugar-blood-level.png" alt="Diabetes" class="disease-icon me-2">
+                                    <span>Diabetes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Celiac Disease -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="celiac" id="celiac">
+                                <label class="form-check-label d-flex align-items-center" for="celiac">
+                                    <img src="img/gluten-free.png" alt="Celiac Disease" class="disease-icon me-2">
+                                    <span>Celiac Disease</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hypertension -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="hypertension" id="hypertension">
+                                <label class="form-check-label d-flex align-items-center" for="hypertension">
+                                    <img src="img/hypertension.png" alt="Hypertension" class="disease-icon me-2">
+                                    <span>Hypertension (High Blood Pressure)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chronic Kidney Disease -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="kidney" id="kidney">
+                                <label class="form-check-label d-flex align-items-center" for="kidney">
+                                    <img src="img/fruit.png" alt="Chronic Kidney Disease" class="disease-icon me-2">
+                                    <span>Chronic Kidney Disease</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lactose Intolerance -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="lactose" id="lactose">
+                                <label class="form-check-label d-flex align-items-center" for="lactose">
+                                    <img src="img/intolerant.png" alt="Lactose Intolerance" class="disease-icon me-2">
+                                    <span>Lactose Intolerance</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gout -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="gout" id="gout">
+                                <label class="form-check-label d-flex align-items-center" for="gout">
+                                    <img src="img/gout.png" alt="Gout" class="disease-icon me-2">
+                                    <span>Gout</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IBS -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="disease-card">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="ibs" id="ibs">
+                                <label class="form-check-label d-flex align-items-center" for="ibs">
+                                    <img src="img/IBS.png" alt="IBS" class="disease-icon me-2">
+                                    <span>Irritable Bowel Syndrome (IBS)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Visual Disease Guide Section -->
+    <section class="disease-guide-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Visual Guide to Dietary Recommendations</h2>
+            
+            <div class="row">
+                <!-- Diabetes Guide -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><img src="img/sugar-blood-level.png" alt="Diabetes" class="disease-icon me-2"> Diabetes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Non-starchy vegetables</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Lean proteins</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Whole grains (in moderation)</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Nuts and seeds</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Berries</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Sugary drinks</li>
+                                        <li><i class="fas fa-utensils me-2"></i> White bread, pasta, rice</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Processed sweets</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Fruit juices</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Full-fat dairy</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Celiac Disease Guide -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-warning">
+                            <h5 class="mb-0"><img src="img/gluten-free.png" alt="Celiac Disease" class="disease-icon me-2"> Celiac Disease</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Rice and rice noodles</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Potatoes and sweet potatoes</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Corn and cornmeal</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Quinoa</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Fresh fruits and vegetables</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Wheat and wheat products</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Barley</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Rye</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Most breads and pastas</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Many processed foods</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hypertension Guide -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><img src="img/hypertension.png" alt="Hypertension" class="disease-icon me-2"> Hypertension</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Leafy greens</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Berries</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Bananas (potassium)</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Beets</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Fatty fish (omega-3)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> High sodium foods</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Processed meats</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Canned soups</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Pickled foods</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Fast food</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lactose Intolerance Guide -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><img src="img/intolerant.png" alt="Lactose Intolerance" class="disease-icon me-2"> Lactose Intolerance</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Plant-based milks</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Hard aged cheeses</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Lactose-free dairy products</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Non-dairy yogurts</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Calcium-fortified foods</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                    <ul class="list-unstyled text-start">
+                                        <li><i class="fas fa-utensils me-2"></i> Milk and cream</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Ice cream</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Soft cheeses</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Yogurt (regular)</li>
+                                        <li><i class="fas fa-utensils me-2"></i> Creamy sauces</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#moreDiseasesGuide">
+                    Show More Health Conditions <i class="fas fa-chevron-down ms-1"></i>
+                </button>
+            </div>
+            
+            <div class="collapse mt-4" id="moreDiseasesGuide">
+                <div class="row">
+                    <!-- Gout Guide -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-secondary text-white">
+                                <h5 class="mb-0"><img src="img/gout.png" alt="Gout" class="disease-icon me-2"> Gout</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                        <ul class="list-unstyled text-start">
+                                            <li><i class="fas fa-utensils me-2"></i> Low-fat dairy</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Plant proteins</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Whole grains</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Fruits (except high-purine)</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Vegetables (except high-purine)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                        <ul class="list-unstyled text-start">
+                                            <li><i class="fas fa-utensils me-2"></i> Organ meats</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Red meat</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Seafood (especially shellfish)</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Alcohol (especially beer)</li>
+                                            <li><i class="fas fa-utensils me-2"></i> High-fructose foods</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IBS Guide -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><img src="img/IBS.png" alt="IBS" class="disease-icon me-2"> IBS</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-success text-start"><i class="fas fa-check-circle"></i> Recommended Foods</h6>
+                                        <ul class="list-unstyled text-start">
+                                            <li><i class="fas fa-utensils me-2"></i> Soluble fiber foods</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Lean proteins</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Cooked vegetables</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Low-FODMAP fruits</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Gluten-free grains</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-danger text-start"><i class="fas fa-times-circle"></i> Foods to Avoid</h6>
+                                        <ul class="list-unstyled text-start">
+                                            <li><i class="fas fa-utensils me-2"></i> High-FODMAP foods</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Caffeine</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Alcohol</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Spicy foods</li>
+                                            <li><i class="fas fa-utensils me-2"></i> Fried foods</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2023 Smart Digital Food Menu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <div class="toast-icon me-2"></div>
+                <strong class="me-auto toast-title">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -12,13 +12,10 @@ INSERT INTO food_categories (category_name, description) VALUES
 
 --  Health Conditions
 INSERT INTO health_conditions (condition_name, condition_code, description, dietary_restrictions, foods_to_avoid, recommended_foods, icon_path) VALUES
-('Diabetes', 'DM', 'A group of metabolic disorders characterized by high blood sugar levels', 'Low glycemic index foods, limited refined carbohydrates', 'Sugary drinks, white bread, pasta, rice, processed sweets, fruit juices', 'Non-starchy vegetables, lean proteins, whole grains in moderation, nuts, seeds, berries', 'IMG/sugar-blood-level.png'),
-('Celiac Disease', 'CD', 'An autoimmune disorder triggered by gluten consumption', 'Strict gluten-free diet required', 'Wheat, barley, rye, most breads and pastas, processed foods with gluten', 'Rice, potatoes, corn, quinoa, fresh fruits and vegetables, gluten-free labeled products', 'IMG/gluten-free.png'),
-('Hypertension', 'HTN', 'High blood pressure condition requiring low-sodium diet', 'Low sodium, DASH diet principles', 'High sodium foods, processed meats, canned soups, pickled foods, fast food', 'Potassium-rich foods like bananas, leafy greens, beets, low-sodium options', 'IMG/hypertension.png'),
-('Chronic Kidney Disease', 'CKD', 'Progressive kidney function decline requiring protein and mineral restrictions', 'Limited protein, phosphorus, and potassium', 'High-protein foods, processed foods, high-potassium foods', 'Low-protein options, controlled portions, fresh vegetables in moderation', 'IMG/fruit.png'),
-('Lactose Intolerance', 'LI', 'Inability to digest lactose, requiring dairy-free alternatives', 'Avoid lactose-containing dairy products', 'Milk, ice cream, soft cheeses, regular yogurt, creamy sauces', 'Plant-based milks, hard aged cheeses, lactose-free products, calcium-fortified foods', 'IMG/intolerant.png'),
-('Gout', 'GOUT', 'Inflammatory arthritis caused by high uric acid levels', 'Low-purine diet, avoid alcohol', 'Organ meats, red meat, seafood (especially shellfish), alcohol (especially beer)', 'Low-fat dairy, plant proteins, whole grains, fruits, vegetables', 'IMG/gout.png'),
-('Irritable Bowel Syndrome', 'IBS', 'Digestive disorder causing abdominal pain and altered bowel habits', 'Low-FODMAP diet may help, avoid trigger foods', 'High-FODMAP foods, caffeine, alcohol, spicy foods, fried foods', 'Soluble fiber foods, lean proteins, cooked vegetables, low-FODMAP fruits', 'IMG/hamburger.png');
+('Diabetes Mellitus', 'DM', 'Chronic condition affecting blood sugar regulation', 'Monitor carbohydrate intake, eat regular meals', 'Sugary drinks, refined grains, processed foods, candy, pastries', 'Whole grains, lean proteins, non-starchy vegetables, legumes, berries', 'img/diabetes.png'),
+('Hypertension', 'HTN', 'High blood pressure condition', 'Reduce sodium intake, increase potassium', 'Processed foods, canned foods, fast food, salty snacks', 'Fresh fruits, vegetables, whole grains, lean meats, low-fat dairy', 'img/hypertension.png'),
+('Celiac Disease', 'CD', 'Autoimmune disorder triggered by gluten consumption', 'Strict gluten-free diet', 'Wheat, barley, rye, malt, brewer''s yeast', 'Naturally gluten-free foods, certified gluten-free products', 'img/celiac.png'),
+('Irritable Bowel Syndrome', 'IBS', 'Digestive disorder causing abdominal pain and altered bowel habits', 'Low-FODMAP diet may help, avoid trigger foods', 'High-FODMAP foods, caffeine, alcohol, spicy foods, fried foods', 'Soluble fiber foods, lean proteins, cooked vegetables, low-FODMAP fruits', 'img/IBS.png');
 
 -- Allergens
 INSERT INTO allergens (allergen_name, allergen_code, description, severity_warning) VALUES
@@ -33,19 +30,19 @@ INSERT INTO allergens (allergen_name, allergen_code, description, severity_warni
 
 -- Food Items with information
 INSERT INTO food_items (food_name, category_id, description, image_path, serving_size, serving_unit, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, glycemic_index) VALUES
-('Hamburger', 1, 'Classic fast food burger with beef patty, bun, lettuce, tomato', 'IMG/hamburger.png', '1', 'piece', FALSE, FALSE, FALSE, FALSE, 85),
-('Vegetable Biryani', 2, 'Aromatic rice dish with mixed vegetables and spices', 'IMG/biryani.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 45),
-('Margherita Pizza', 3, 'Traditional Italian pizza with tomato sauce, mozzarella, and basil', 'IMG/pizza.png', '2', 'slices', TRUE, FALSE, FALSE, FALSE, 80),
-('Grilled Chicken', 4, 'Lean chicken breast grilled without skin', 'IMG/chicken-leg.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
-('Grilled Salmon', 5, 'Atlantic salmon fillet grilled with minimal seasoning', 'IMG/salmon.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
-('Chocolate Cake', 7, 'Rich chocolate layer cake with frosting', 'IMG/chocolate-cake.png', '1', 'slice', TRUE, FALSE, FALSE, FALSE, 70),
-('Green Tea', 8, 'Traditional green tea brewed from tea leaves', 'IMG/green-tea.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 0),
-('Lentil Soup', 6, 'Protein-rich soup made from various lentils', 'IMG/lentils.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 35),
-('Ribeye Steak', 9, 'Premium cut of beef with high fat marbling', 'IMG/steak.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
-('Tandoori Chicken', 2, 'Indian-style chicken marinated in yogurt and spices', 'IMG/tandoori.png', '100', 'grams', FALSE, FALSE, TRUE, FALSE, 0),
-('Grilled Turkey', 4, 'Lean turkey breast grilled without skin', 'IMG/grilled-meat.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
-('Mineral Water', 8, 'Pure mineral water for hydration', 'IMG/bottle.png', '500', 'ml', TRUE, TRUE, TRUE, TRUE, 0),
-('Brown Rice Bowl', 6, 'Nutritious whole grain brown rice', 'IMG/rice.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 50);
+('Hamburger', 1, 'Classic fast food burger with beef patty, bun, lettuce, tomato', 'img/hamburger_food.png', '1', 'piece', FALSE, FALSE, FALSE, FALSE, 85),
+('Vegetable Biryani', 2, 'Aromatic rice dish with mixed vegetables and spices', 'img/biryani.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 45),
+('Margherita Pizza', 3, 'Traditional Italian pizza with tomato sauce, mozzarella, and basil', 'img/pizza.png', '2', 'slices', TRUE, FALSE, FALSE, FALSE, 80),
+('Grilled Chicken', 4, 'Lean chicken breast grilled without skin', 'img/chicken-leg.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
+('Grilled Salmon', 5, 'Atlantic salmon fillet grilled with minimal seasoning', 'img/salmon.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
+('Chocolate Cake', 7, 'Rich chocolate layer cake with frosting', 'img/chocolate-cake.png', '1', 'slice', TRUE, FALSE, FALSE, FALSE, 70),
+('Green Tea', 8, 'Traditional green tea brewed from tea leaves', 'img/green-tea.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 0),
+('Lentil Soup', 6, 'Protein-rich soup made from various lentils', 'img/lentils.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 35),
+('Ribeye Steak', 9, 'Premium cut of beef with high fat marbling', 'img/steak.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
+('Tandoori Chicken', 2, 'Indian-style chicken marinated in yogurt and spices', 'img/tandoori.png', '100', 'grams', FALSE, FALSE, TRUE, FALSE, 0),
+('Grilled Turkey', 4, 'Lean turkey breast grilled without skin', 'img/grilled-meat.png', '100', 'grams', FALSE, FALSE, TRUE, TRUE, 0),
+('Mineral Water', 8, 'Pure mineral water for hydration', 'img/bottle.png', '500', 'ml', TRUE, TRUE, TRUE, TRUE, 0),
+('Brown Rice Bowl', 6, 'Nutritious whole grain brown rice', 'img/rice.png', '1', 'cup', TRUE, TRUE, TRUE, TRUE, 50);
 
 -- Nutrition for each food item
 INSERT INTO nutrition_facts (food_id, calories, protein_g, carbs_g, fat_g, saturated_fat_g, cholesterol_mg, sodium_mg, potassium_mg, fiber_g, sugar_g) VALUES

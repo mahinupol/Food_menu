@@ -1,0 +1,63 @@
+{
+  "html": [
+    "index.html",
+    "assets/about.html",
+    "assets/contact.html",
+    "assets/dashboard.html",
+    "assets/diseases.html",
+    "assets/menu.html",
+    "assets/settings.html"
+  ],
+  "css": [
+    "style.css"
+  ],
+  "js": [
+    "script.js"
+  ],
+  "images": [
+    "assets/img/biryani.png",
+    "assets/img/bottle.png",
+    "assets/img/celiac.png",
+    "assets/img/chicken-leg.png",
+    "assets/img/chocolate-cake.png",
+    "assets/img/cooking.png",
+    "assets/img/diabetes.png",
+    "assets/img/fruit.png",
+    "assets/img/gluten-free.png",
+    "assets/img/gout.png",
+    "assets/img/green-tea.png",
+    "assets/img/grilled-meat.png",
+    "assets/img/hamburger_food.png",
+    "assets/img/heart.png",
+    "assets/img/hypertension.png",
+    "assets/img/IBS.png",
+    "assets/img/intolerant.png",
+    "assets/img/lentils.png",
+    "assets/img/pizza.png",
+    "assets/img/rice.png",
+    "assets/img/salmon.png",
+    "assets/img/steak.png",
+    "assets/img/sugar-blood-level 2.png",
+    "assets/img/sugar-blood-level.png",
+    "assets/img/tandoori.png",
+    "assets/img/logo/849846e2-5103-46b1-b286-a21d06ebb963.png",
+    "assets/img/background/apple-7205616_1920.jpg",
+    "assets/img/background/background-9509852_1920.jpg",
+    "assets/img/background/front_bg.jpg",
+    "assets/img/background/fruit-8848715_1920.jpg",
+    "assets/img/background/istockphoto-1313187927-1024x1024.jpg",
+    "assets/img/background/leaves-8923309_1920.png",
+    "assets/img/background/lime-2481346_1920.jpg",
+    "assets/img/background/pancakes-2291908_1920.jpg",
+    "assets/img/background/peas-1205673_1920.jpg",
+    "assets/img/background/pizza-2068272_1920.jpg",
+    "assets/img/background/pizza-3010062_1920.jpg",
+    "assets/img/background/pizza-6682514_1920.png",
+    "assets/img/background/pumpkin-4470981_1920.jpg",
+    "assets/img/background/romanesco-3493007_1920.jpg",
+    "assets/img/background/spices-1914130_1920.jpg",
+    "assets/img/user/IMG_5806.jpg",
+    "assets/img/user/IMG_5807.jpg",
+    "assets/img/user/IMG_5808.JPG"
+  ]
+}

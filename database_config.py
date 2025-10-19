@@ -2,50 +2,46 @@
 # Copy this file to 'database_config.py' and update with your actual database credentials
 
 import os
-import mysql.connector
-from mysql.connector import Error
 import sqlite3
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List, Tuple
+
+# Try to import MySQL connector
+try:
+    import mysql.connector
+    MYSQL_AVAILABLE = True
+except ImportError:
+    MYSQL_AVAILABLE = False
+    mysql = None
+    print("MySQL connector not available, falling back to SQLite")
 
 class DatabaseConfig:
     """Database configuration and connection management"""
-    
-    # MySQL Configuration (Production)
-    MYSQL_CONFIG = {
-        'host': 'localhost',
-        'database': 'smart_food_menu',
-        'user': 'your_username',
-        'password': 'your_password',
-        'port': 3306,
-        'charset': 'utf8mb4',
-        'autocommit': True
-    }
     
     # SQLite Configuration (Development/Testing)
     SQLITE_CONFIG = {
         'database': 'smart_food_menu.db'
     }
     
+    # MySQL Configuration (Production)
+    MYSQL_CONFIG = {
+        'host': os.getenv('MYSQL_HOST', 'localhost'),
+        'port': int(os.getenv('MYSQL_PORT', 3306)),
+        'user': os.getenv('MYSQL_USER', 'root'),
+        'password': os.getenv('MYSQL_PASSWORD', ''),
+        'database': os.getenv('MYSQL_DATABASE', 'smart_food_menu'),
+        'charset': 'utf8mb4',
+        'autocommit': True
+    }
+    
     # Environment-based database selection
     DATABASE_TYPE = os.getenv('DATABASE_TYPE', 'sqlite')  # 'mysql' or 'sqlite'
-    
-    @classmethod
-    def get_mysql_connection(cls) -> Optional[mysql.connector.MySQLConnection]:
-        """Create and return MySQL database connection"""
-        try:
-            connection = mysql.connector.connect(**cls.MYSQL_CONFIG)
-            if connection.is_connected():
-                print("Successfully connected to MySQL database")
-                return connection
-        except Error as e:
-            print(f"Error connecting to MySQL: {e}")
-            return None
     
     @classmethod
     def get_sqlite_connection(cls) -> Optional[sqlite3.Connection]:
         """Create and return SQLite database connection"""
         try:
-            connection = sqlite3.connect(cls.SQLITE_CONFIG['database'])
+            # Use check_same_thread=False to allow usage across threads
+            connection = sqlite3.connect(cls.SQLITE_CONFIG['database'], check_same_thread=False)
             connection.row_factory = sqlite3.Row  # Enable dict-like access to rows
             print("Successfully connected to SQLite database")
             return connection
@@ -54,10 +50,30 @@ class DatabaseConfig:
             return None
     
     @classmethod
+    def get_mysql_connection(cls):
+        """Create and return MySQL database connection"""
+        if not MYSQL_AVAILABLE or mysql is None:
+            print("MySQL not available, falling back to SQLite")
+            return None
+            
+        try:
+            connection = mysql.connector.connect(**cls.MYSQL_CONFIG)
+            print("Successfully connected to MySQL database")
+            return connection
+        except Exception as e:
+            print(f"Error connecting to MySQL: {e}")
+            return None
+    
+    @classmethod
     def get_connection(cls):
         """Get database connection based on environment configuration"""
-        if cls.DATABASE_TYPE.lower() == 'mysql':
-            return cls.get_mysql_connection()
+        if cls.DATABASE_TYPE == 'mysql' and MYSQL_AVAILABLE:
+            conn = cls.get_mysql_connection()
+            if conn:
+                return conn
+            else:
+                print("Falling back to SQLite")
+                return cls.get_sqlite_connection()
         else:
             return cls.get_sqlite_connection()
     
@@ -76,11 +92,20 @@ class DatabaseOperations:
     
     def __init__(self):
         self.connection = DatabaseConfig.get_connection()
+        self.is_mysql = DatabaseConfig.DATABASE_TYPE == 'mysql' and MYSQL_AVAILABLE
     
-    def execute_query(self, query: str, params: tuple = None) -> Optional[list]:
+    def execute_query(self, query: str, params: Optional[Tuple] = None) -> Optional[List]:
         """Execute a SELECT query and return results"""
+        if not self.connection:
+            print("No database connection available")
+            return None
+            
         try:
             cursor = self.connection.cursor()
+            # Adjust query for MySQL if needed
+            if self.is_mysql:
+                query = query.replace('?', '%s')
+            
             if params:
                 cursor.execute(query, params)
             else:
@@ -88,28 +113,42 @@ class DatabaseOperations:
             
             results = cursor.fetchall()
             cursor.close()
+            
+            # Convert MySQL results to list of tuples for consistency
+            if self.is_mysql and results:
+                return [tuple(row) for row in results]
             return results
         except Exception as e:
             print(f"Error executing query: {e}")
             return None
     
-    def execute_update(self, query: str, params: tuple = None) -> bool:
+    def execute_update(self, query: str, params: Optional[Tuple] = None) -> bool:
         """Execute an INSERT, UPDATE, or DELETE query"""
+        if not self.connection:
+            print("No database connection available")
+            return False
+            
         try:
             cursor = self.connection.cursor()
+            # Adjust query for MySQL if needed
+            if self.is_mysql:
+                query = query.replace('?', '%s')
+            
             if params:
                 cursor.execute(query, params)
             else:
                 cursor.execute(query)
             
-            self.connection.commit()
+            if not self.is_mysql:  # SQLite needs explicit commit
+                self.connection.commit()
+            
             cursor.close()
             return True
         except Exception as e:
             print(f"Error executing update: {e}")
             return False
     
-    def get_user_health_conditions(self, user_id: int) -> list:
+    def get_user_health_conditions(self, user_id: int) -> Optional[List]:
         """Get all health conditions for a specific user"""
         query = """
         SELECT hc.condition_name, hc.condition_code, uhc.severity
@@ -119,7 +158,7 @@ class DatabaseOperations:
         """
         return self.execute_query(query, (user_id,))
     
-    def get_food_recommendations_for_user(self, user_id: int) -> list:
+    def get_food_recommendations_for_user(self, user_id: int) -> Optional[List]:
         """Get personalized food recommendations for a user based on their health conditions"""
         query = """
         SELECT DISTINCT fi.food_name, fc.category_name, fr.recommendation_type, 
@@ -135,7 +174,7 @@ class DatabaseOperations:
         """
         return self.execute_query(query, (user_id,))
     
-    def get_foods_to_avoid_for_user(self, user_id: int) -> list:
+    def get_foods_to_avoid_for_user(self, user_id: int) -> Optional[List]:
         """Get foods that should be avoided by a user based on their health conditions"""
         query = """
         SELECT DISTINCT fi.food_name, fc.category_name, fr.recommendation_type, 
@@ -149,7 +188,7 @@ class DatabaseOperations:
         """
         return self.execute_query(query, (user_id,))
     
-    def search_foods(self, search_term: str, category_filter: str = None) -> list:
+    def search_foods(self, search_term: str, category_filter: Optional[str] = None) -> Optional[List]:
         """Search for foods by name or category"""
         if category_filter:
             query = """
@@ -177,7 +216,7 @@ class DatabaseOperations:
             search_pattern = f"%{search_term}%"
             return self.execute_query(query, (search_pattern, search_pattern))
     
-    def get_nutrition_facts(self, food_id: int) -> Optional[dict]:
+    def get_nutrition_facts(self, food_id: int) -> Optional[Tuple]:
         """Get detailed nutrition facts for a specific food item"""
         query = """
         SELECT nf.*, fi.food_name, fi.serving_size, fi.serving_unit

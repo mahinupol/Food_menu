@@ -1,4 +1,4 @@
--- Smart Digital Food Menu Database Schema
+-- Smart Digital Food Menu Database Schema (SQLite Compatible)
 -- This database supports a health-focused food recommendation system
 
 -- Drop existing tables if they exist
@@ -16,85 +16,85 @@ DROP TABLE IF EXISTS food_categories;
 
 -- Create Food Categories table
 CREATE TABLE food_categories (
-    category_id INT PRIMARY KEY AUTO_INCREMENT,
-    category_name VARCHAR(50) UNIQUE NOT NULL,
+    category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_name TEXT UNIQUE NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Health Conditions table
 CREATE TABLE health_conditions (
-    condition_id INT PRIMARY KEY AUTO_INCREMENT,
-    condition_name VARCHAR(100) UNIQUE NOT NULL,
-    condition_code VARCHAR(20) UNIQUE NOT NULL,
+    condition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    condition_name TEXT UNIQUE NOT NULL,
+    condition_code TEXT UNIQUE NOT NULL,
     description TEXT,
     dietary_restrictions TEXT,
     foods_to_avoid TEXT,
     recommended_foods TEXT,
-    severity_levels ENUM('Mild', 'Moderate', 'Severe'),
-    icon_path VARCHAR(255),
+    severity_levels TEXT CHECK(severity_levels IN ('Mild', 'Moderate', 'Severe')),
+    icon_path TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Food Items table
 CREATE TABLE food_items (
-    food_id INT PRIMARY KEY AUTO_INCREMENT,
-    food_name VARCHAR(100) NOT NULL,
-    category_id INT,
+    food_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    food_name TEXT NOT NULL,
+    category_id INTEGER,
     description TEXT,
-    image_path VARCHAR(255),
-    serving_size VARCHAR(50),
-    serving_unit VARCHAR(20),
-    preparation_method VARCHAR(100),
-    origin_cuisine VARCHAR(50),
+    image_path TEXT,
+    serving_size TEXT,
+    serving_unit TEXT,
+    preparation_method TEXT,
+    origin_cuisine TEXT,
     is_vegetarian BOOLEAN DEFAULT FALSE,
     is_vegan BOOLEAN DEFAULT FALSE,
     is_gluten_free BOOLEAN DEFAULT FALSE,
     is_dairy_free BOOLEAN DEFAULT FALSE,
-    glycemic_index INT,
-    cost_category ENUM('Budget', 'Moderate', 'Premium'),
-    availability ENUM('Common', 'Seasonal', 'Rare'),
-    shelf_life_days INT,
+    glycemic_index INTEGER,
+    cost_category TEXT CHECK(cost_category IN ('Budget', 'Moderate', 'Premium')),
+    availability TEXT CHECK(availability IN ('Common', 'Seasonal', 'Rare')),
+    shelf_life_days INTEGER,
     storage_requirements TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES food_categories(category_id)
 );
 
 -- Create Nutrition Facts table
 CREATE TABLE nutrition_facts (
-    nutrition_id INT PRIMARY KEY AUTO_INCREMENT,
-    food_id INT,
-    calories DECIMAL(7,2),
-    protein_g DECIMAL(6,2),
-    carbs_g DECIMAL(6,2),
-    fat_g DECIMAL(6,2),
-    saturated_fat_g DECIMAL(6,2),
-    trans_fat_g DECIMAL(6,2),
-    cholesterol_mg DECIMAL(6,2),
-    sodium_mg DECIMAL(7,2),
-    potassium_mg DECIMAL(7,2),
-    fiber_g DECIMAL(6,2),
-    sugar_g DECIMAL(6,2),
-    vitamin_a_iu DECIMAL(8,2),
-    vitamin_c_mg DECIMAL(6,2),
-    calcium_mg DECIMAL(7,2),
-    iron_mg DECIMAL(6,2),
-    vitamin_d_iu DECIMAL(8,2),
-    vitamin_b12_mcg DECIMAL(6,2),
-    folate_mcg DECIMAL(6,2),
-    omega3_g DECIMAL(6,3),
-    antioxidants_score INT,
+    nutrition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    food_id INTEGER,
+    calories REAL,
+    protein_g REAL,
+    carbs_g REAL,
+    fat_g REAL,
+    saturated_fat_g REAL,
+    trans_fat_g REAL,
+    cholesterol_mg REAL,
+    sodium_mg REAL,
+    potassium_mg REAL,
+    fiber_g REAL,
+    sugar_g REAL,
+    vitamin_a_iu REAL,
+    vitamin_c_mg REAL,
+    calcium_mg REAL,
+    iron_mg REAL,
+    vitamin_d_iu REAL,
+    vitamin_b12_mcg REAL,
+    folate_mcg REAL,
+    omega3_g REAL,
+    antioxidants_score INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (food_id) REFERENCES food_items(food_id) ON DELETE CASCADE
 );
 
 -- Create Allergens table
 CREATE TABLE allergens (
-    allergen_id INT PRIMARY KEY AUTO_INCREMENT,
-    allergen_name VARCHAR(50) UNIQUE NOT NULL,
-    allergen_code VARCHAR(10) UNIQUE NOT NULL,
+    allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    allergen_name TEXT UNIQUE NOT NULL,
+    allergen_code TEXT UNIQUE NOT NULL,
     description TEXT,
     severity_warning TEXT,
     alternative_ingredients TEXT,
@@ -103,34 +103,34 @@ CREATE TABLE allergens (
 
 -- Create Food Allergens junction table
 CREATE TABLE food_allergens (
-    food_allergen_id INT PRIMARY KEY AUTO_INCREMENT,
-    food_id INT,
-    allergen_id INT,
-    severity_level ENUM('Contains', 'May Contain', 'Traces'),
+    food_allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    food_id INTEGER,
+    allergen_id INTEGER,
+    severity_level TEXT CHECK(severity_level IN ('Contains', 'May Contain', 'Traces')),
     notes TEXT,
     FOREIGN KEY (food_id) REFERENCES food_items(food_id) ON DELETE CASCADE,
     FOREIGN KEY (allergen_id) REFERENCES allergens(allergen_id),
-    UNIQUE KEY unique_food_allergen (food_id, allergen_id)
+    UNIQUE(food_id, allergen_id)
 );
 
 -- Create Food Recommendations table
 CREATE TABLE food_recommendations (
-    recommendation_id INT PRIMARY KEY AUTO_INCREMENT,
-    food_id INT,
-    condition_id INT,
-    recommendation_type ENUM('Highly Recommended', 'Recommended', 'Caution', 'Avoid'),
-    safety_score INT CHECK (safety_score BETWEEN 1 AND 10),
+    recommendation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    food_id INTEGER,
+    condition_id INTEGER,
+    recommendation_type TEXT CHECK(recommendation_type IN ('Highly Recommended', 'Recommended', 'Caution', 'Avoid')),
+    safety_score INTEGER CHECK (safety_score BETWEEN 1 AND 10),
     reasoning TEXT,
-    portion_recommendation VARCHAR(100),
-    frequency_recommendation VARCHAR(100),
+    portion_recommendation TEXT,
+    frequency_recommendation TEXT,
     preparation_notes TEXT,
-    created_by VARCHAR(100),
-    approved_by VARCHAR(100),
+    created_by TEXT,
+    approved_by TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (food_id) REFERENCES food_items(food_id) ON DELETE CASCADE,
     FOREIGN KEY (condition_id) REFERENCES health_conditions(condition_id),
-    UNIQUE KEY unique_food_condition (food_id, condition_id)
+    UNIQUE(food_id, condition_id)
 );
 
 -- Create indexes for better performance

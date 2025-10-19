@@ -13,14 +13,14 @@ import os
 from typing import Dict, List, Optional, Any
 
 # Import our database operations
-from database_config import DatabaseOperations
+from db_config.manager import DatabaseManager
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-change-this')
 CORS(app)  # Enable CORS for frontend integration
 
 # Initialize database
-db = DatabaseOperations()
+db = DatabaseManager()
 
 @app.route('/')
 def index():
