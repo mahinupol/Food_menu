@@ -426,12 +426,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     );
                     
                     let mealHtml = '';
+                    let recommendedItems = [];
                     
                     // Add a protein if available
                     if (proteins.length > 0) {
                         const randomProtein = proteins[Math.floor(Math.random() * proteins.length)];
                         const proteinName = randomProtein.querySelector('.card-title').textContent;
                         const proteinImg = randomProtein.querySelector('img').getAttribute('src');
+                        const proteinId = randomProtein.getAttribute('id');
+                        recommendedItems.push(proteinId);
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -451,6 +454,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         const randomSide = sides[Math.floor(Math.random() * sides.length)];
                         const sideName = randomSide.querySelector('.card-title').textContent;
                         const sideImg = randomSide.querySelector('img').getAttribute('src');
+                        const sideId = randomSide.getAttribute('id');
+                        recommendedItems.push(sideId);
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -470,6 +475,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
                         const drinkName = randomDrink.querySelector('.card-title').textContent;
                         const drinkImg = randomDrink.querySelector('img').getAttribute('src');
+                        const drinkId = randomDrink.getAttribute('id');
+                        recommendedItems.push(drinkId);
                         
                         mealHtml += `
                             <div class="col-md-4 mb-3">
@@ -484,8 +491,32 @@ document.addEventListener('DOMContentLoaded', function() {
                         `;
                     }
                     
+                    // Add "Add All to Cart" button
+                    mealHtml += `
+                        <div class="col-12 text-center mt-3">
+                            <button class="btn btn-success btn-lg" id="addAllMealsToCart" data-items='${JSON.stringify(recommendedItems)}'>
+                                <i class="fas fa-shopping-cart me-2"></i>Add All to Cart
+                            </button>
+                        </div>
+                    `;
+                    
                     recommendedMeals.innerHTML = mealHtml;
                     recommendedSection.classList.remove('d-none');
+                    
+                    // Add event listener for "Add All to Cart" button
+                    const addAllBtn = document.getElementById('addAllMealsToCart');
+                    if (addAllBtn) {
+                        addAllBtn.addEventListener('click', function() {
+                            const items = JSON.parse(this.getAttribute('data-items'));
+                            items.forEach(itemId => {
+                                const foodItem = document.getElementById(itemId);
+                                if (foodItem) {
+                                    addToCart(foodItem);
+                                }
+                            });
+                            showToast(`Added all 3 meals to cart!`, 'success');
+                        });
+                    }
                 }
             }
         }
