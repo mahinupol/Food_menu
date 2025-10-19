@@ -16,7 +16,7 @@
 <body>
     <style>
         body {
-            background-color: #fafafa;
+            background: linear-gradient(135deg, #e0f4eb, #b0e2ce 65%, #74d2ac 100%);
         }
     </style>
     <!-- Navbar -->
@@ -60,88 +60,9 @@
     <!-- Disease Selection Section -->
     <section class="disease-section py-5">
         <div class="container">
-            <h1 class="text-center mb-5">Select Your Health Condition</h1>
-            
-            <!-- Modern Health Condition Cards -->
-            <div class="health-condition-selector mb-5">
-                <div class="row g-3 justify-content-center">
-                    <!-- Diabetes Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="diabetes" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-heartbeat"></i>
-                            </div>
-                            <h5 class="health-card-title">Diabetes</h5>
-                            <p class="health-card-desc">Type 1 & Type 2</p>
-                        </div>
-                    </div>
-
-                    <!-- Celiac Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="celiac" style="background: linear-gradient(135deg, #ffa500 0%, #ffb84d 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-ban"></i>
-                            </div>
-                            <h5 class="health-card-title">Celiac Disease</h5>
-                            <p class="health-card-desc">Gluten-Free</p>
-                        </div>
-                    </div>
-
-                    <!-- Hypertension Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="hypertension" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <h5 class="health-card-title">Hypertension</h5>
-                            <p class="health-card-desc">High Blood Pressure</p>
-                        </div>
-                    </div>
-
-                    <!-- Kidney Disease Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="kidney" style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-kidney"></i>
-                            </div>
-                            <h5 class="health-card-title">Kidney Disease</h5>
-                            <p class="health-card-desc">Chronic Care</p>
-                        </div>
-                    </div>
-
-                    <!-- Lactose Intolerance Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="lactose" style="background: linear-gradient(135deg, #f39c12 0%, #d68910 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-glass-water"></i>
-                            </div>
-                            <h5 class="health-card-title">Lactose Intolerance</h5>
-                            <p class="health-card-desc">Dairy-Free</p>
-                        </div>
-                    </div>
-
-                    <!-- Gout Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="gout" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-shoe-prints"></i>
-                            </div>
-                            <h5 class="health-card-title">Gout</h5>
-                            <p class="health-card-desc">Joint Management</p>
-                        </div>
-                    </div>
-
-                    <!-- IBS Card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="health-card" data-condition="ibs" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
-                            <div class="health-card-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <h5 class="health-card-title">IBS</h5>
-                            <p class="health-card-desc">Bowel Syndrome</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold mb-3">Select Your Health Condition</h1>
+                <p class="lead text-muted">Choose your health conditions to get personalized food recommendations</p>
             </div>
             
             <form id="diseaseForm">
@@ -152,7 +73,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="diabetes" id="diabetes">
                                 <label class="form-check-label d-flex align-items-center" for="diabetes">
-                                    <img src="img/sugar-blood-level.png" alt="Diabetes" class="disease-icon me-2">
+                                    <img src="img/sugar-blood-level.png" alt="Diabetes" class="disease-icon me-3">
                                     <span>Diabetes</span>
                                 </label>
                             </div>
@@ -165,7 +86,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="celiac" id="celiac">
                                 <label class="form-check-label d-flex align-items-center" for="celiac">
-                                    <img src="img/gluten-free.png" alt="Celiac Disease" class="disease-icon me-2">
+                                    <img src="img/gluten-free.png" alt="Celiac Disease" class="disease-icon me-3">
                                     <span>Celiac Disease</span>
                                 </label>
                             </div>
@@ -178,7 +99,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="hypertension" id="hypertension">
                                 <label class="form-check-label d-flex align-items-center" for="hypertension">
-                                    <img src="img/hypertension.png" alt="Hypertension" class="disease-icon me-2">
+                                    <img src="img/hypertension.png" alt="Hypertension" class="disease-icon me-3">
                                     <span>Hypertension (High Blood Pressure)</span>
                                 </label>
                             </div>
@@ -191,7 +112,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="kidney" id="kidney">
                                 <label class="form-check-label d-flex align-items-center" for="kidney">
-                                    <img src="img/fruit.png" alt="Chronic Kidney Disease" class="disease-icon me-2">
+                                    <img src="img/fruit.png" alt="Chronic Kidney Disease" class="disease-icon me-3">
                                     <span>Chronic Kidney Disease</span>
                                 </label>
                             </div>
@@ -204,7 +125,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="lactose" id="lactose">
                                 <label class="form-check-label d-flex align-items-center" for="lactose">
-                                    <img src="img/intolerant.png" alt="Lactose Intolerance" class="disease-icon me-2">
+                                    <img src="img/intolerant.png" alt="Lactose Intolerance" class="disease-icon me-3">
                                     <span>Lactose Intolerance</span>
                                 </label>
                             </div>
@@ -217,7 +138,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="gout" id="gout">
                                 <label class="form-check-label d-flex align-items-center" for="gout">
-                                    <img src="img/gout.png" alt="Gout" class="disease-icon me-2">
+                                    <img src="img/gout.png" alt="Gout" class="disease-icon me-3">
                                     <span>Gout</span>
                                 </label>
                             </div>
@@ -230,7 +151,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="ibs" id="ibs">
                                 <label class="form-check-label d-flex align-items-center" for="ibs">
-                                    <img src="img/IBS.png" alt="IBS" class="disease-icon me-2">
+                                    <img src="img/IBS.png" alt="IBS" class="disease-icon me-3">
                                     <span>Irritable Bowel Syndrome (IBS)</span>
                                 </label>
                             </div>
@@ -239,7 +160,9 @@
                 </div>
                 
                 <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fw-bold">
+                        <i class="fas fa-arrow-right me-2"></i>View Recommendations
+                    </button>
                 </div>
             </form>
         </div>

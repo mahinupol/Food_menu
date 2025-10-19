@@ -25,60 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         bsToast.show();
     }
 
-    // Health Condition Card Selection
-    const healthCards = document.querySelectorAll('.health-card');
-    healthCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const condition = this.getAttribute('data-condition');
-            
-            // Find the corresponding checkbox
-            const checkbox = document.getElementById(condition);
-            
-            if (checkbox) {
-                // Toggle checkbox
-                checkbox.checked = !checkbox.checked;
-                
-                // Update card visual state
-                if (checkbox.checked) {
-                    this.classList.add('selected');
-                    showToast(`${this.querySelector('.health-card-title').textContent} added!`, 'success', '✓ Added');
-                } else {
-                    this.classList.remove('selected');
-                    showToast(`${this.querySelector('.health-card-title').textContent} removed!`, 'info', '✕ Removed');
-                }
-                
-                // Store selected condition
-                localStorage.setItem('selectedCondition', condition);
-            } else {
-                // On homepage - redirect to diseases page
-                const isDiseasesPage = window.location.pathname.includes('diseases.html');
-                
-                if (!isDiseasesPage) {
-                    // Show toast notification
-                    showToast(`${this.querySelector('.health-card-title').textContent} selected!`, 'success', '✓ Selected');
-                    
-                    // Store selected condition
-                    localStorage.setItem('selectedCondition', condition);
-                    
-                    // Redirect to diseases page after a short delay
-                    setTimeout(() => {
-                        window.location.href = 'assets/diseases.html?condition=' + condition;
-                    }, 1200);
-                }
-            }
-        });
-    });
-    
-    // Sync card selection state with checkboxes on page load (for diseases page)
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        if (checkbox.checked) {
-            const cardElement = document.querySelector(`.health-card[data-condition="${checkbox.value}"]`);
-            if (cardElement) {
-                cardElement.classList.add('selected');
-            }
-        }
-    });
-
     // Modern Animation System with Intersection Observer
     const animationObserverOptions = {
         threshold: 0.1,
