@@ -24,12 +24,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #43a047;
+    background: linear-gradient(180deg, #43a047 0%, #1de9b6 100%);
     border-radius: 5px;
+    transition: background 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #2e7d32;
+    background: linear-gradient(180deg, #2e7d32 0%, #00c853 100%);
 }
 
 /* Card hover animations */
@@ -239,6 +240,30 @@ body {
     }
     100% {
         background-position: 1000px 0;
+    }
+}
+
+/* Smooth scale-in animation */
+@keyframes scaleInSmooth {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Smooth fade-in-scale animation */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -500,6 +525,18 @@ body {
     text-align: center;
 }
 
+.animated-logo {
+    animation: scaleInSmooth 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animated-heading {
+    animation: fadeInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.animated-description {
+    animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
 .hero-logo {
     width: 132px;  /* 10% bigger */
     height: 132px; /* 10% bigger */
@@ -509,6 +546,7 @@ body {
     padding: 5px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: scaleInSmooth 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .get-started-btn {
@@ -532,7 +570,7 @@ body {
     border-radius: 16px;
     padding: 28px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 2px solid rgba(67, 160, 71, 0.1);
     position: relative;
     overflow: hidden;
